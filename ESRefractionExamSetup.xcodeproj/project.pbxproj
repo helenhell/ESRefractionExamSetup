@@ -13,7 +13,33 @@
 		514FC1CC2935F06F00118912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CA2935F06F00118912 /* Main.storyboard */; };
 		514FC1CE2935F07100118912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CD2935F07100118912 /* Assets.xcassets */; };
 		514FC1D12935F07100118912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CF2935F07100118912 /* LaunchScreen.storyboard */; };
+		514FC1DF29360A9F00118912 /* ESRefractionExamSetupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1DE29360A9F00118912 /* ESRefractionExamSetupTests.swift */; };
+		514FC1EC29360AAB00118912 /* ESRefractionExamSetupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1EB29360AAB00118912 /* ESRefractionExamSetupUITests.swift */; };
+		514FC1EE29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1ED29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift */; };
+		514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F4293733FF00118912 /* MotionServiceTests.swift */; };
+		514FC1F72937380700118912 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F62937380700118912 /* MotionService.swift */; };
+		514FC1F9293738BD00118912 /* MotionServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F8293738BD00118912 /* MotionServiceError.swift */; };
+		514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FA29374E4E00118912 /* MockMotionService.swift */; };
+		514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */; };
+		514FC1FF2937667400118912 /* MotionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FE2937667400118912 /* MotionSettings.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		514FC1E029360A9F00118912 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 514FC1B92935F06F00118912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 514FC1C02935F06F00118912;
+			remoteInfo = ESRefractionExamSetup;
+		};
+		514FC1EF29360AAB00118912 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 514FC1B92935F06F00118912 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 514FC1C02935F06F00118912;
+			remoteInfo = ESRefractionExamSetup;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		514FC1C12935F06F00118912 /* ESRefractionExamSetup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ESRefractionExamSetup.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,10 +50,35 @@
 		514FC1CD2935F07100118912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		514FC1D02935F07100118912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		514FC1D22935F07100118912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		514FC1DC29360A9F00118912 /* ESRefractionExamSetupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESRefractionExamSetupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		514FC1DE29360A9F00118912 /* ESRefractionExamSetupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESRefractionExamSetupTests.swift; sourceTree = "<group>"; };
+		514FC1E929360AAB00118912 /* ESRefractionExamSetupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESRefractionExamSetupUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		514FC1EB29360AAB00118912 /* ESRefractionExamSetupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESRefractionExamSetupUITests.swift; sourceTree = "<group>"; };
+		514FC1ED29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESRefractionExamSetupUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		514FC1F4293733FF00118912 /* MotionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceTests.swift; sourceTree = "<group>"; };
+		514FC1F62937380700118912 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
+		514FC1F8293738BD00118912 /* MotionServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceError.swift; sourceTree = "<group>"; };
+		514FC1FA29374E4E00118912 /* MockMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionService.swift; sourceTree = "<group>"; };
+		514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceProtocol.swift; sourceTree = "<group>"; };
+		514FC1FE2937667400118912 /* MotionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		514FC1BE2935F06F00118912 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		514FC1D929360A9F00118912 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		514FC1E629360AAB00118912 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				514FC1C32935F06F00118912 /* ESRefractionExamSetup */,
+				514FC1DD29360A9F00118912 /* ESRefractionExamSetupTests */,
+				514FC1EA29360AAB00118912 /* ESRefractionExamSetupUITests */,
 				514FC1C22935F06F00118912 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				514FC1C12935F06F00118912 /* ESRefractionExamSetup.app */,
+				514FC1DC29360A9F00118912 /* ESRefractionExamSetupTests.xctest */,
+				514FC1E929360AAB00118912 /* ESRefractionExamSetupUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,12 +114,35 @@
 				514FC1C42935F06F00118912 /* AppDelegate.swift */,
 				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
 				514FC1C82935F06F00118912 /* ViewController.swift */,
+				514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */,
+				514FC1F62937380700118912 /* MotionService.swift */,
+				514FC1F8293738BD00118912 /* MotionServiceError.swift */,
+				514FC1FE2937667400118912 /* MotionSettings.swift */,
 				514FC1CA2935F06F00118912 /* Main.storyboard */,
 				514FC1CD2935F07100118912 /* Assets.xcassets */,
 				514FC1CF2935F07100118912 /* LaunchScreen.storyboard */,
 				514FC1D22935F07100118912 /* Info.plist */,
 			);
 			path = ESRefractionExamSetup;
+			sourceTree = "<group>";
+		};
+		514FC1DD29360A9F00118912 /* ESRefractionExamSetupTests */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1DE29360A9F00118912 /* ESRefractionExamSetupTests.swift */,
+				514FC1FA29374E4E00118912 /* MockMotionService.swift */,
+				514FC1F4293733FF00118912 /* MotionServiceTests.swift */,
+			);
+			path = ESRefractionExamSetupTests;
+			sourceTree = "<group>";
+		};
+		514FC1EA29360AAB00118912 /* ESRefractionExamSetupUITests */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1EB29360AAB00118912 /* ESRefractionExamSetupUITests.swift */,
+				514FC1ED29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift */,
+			);
+			path = ESRefractionExamSetupUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +165,42 @@
 			productReference = 514FC1C12935F06F00118912 /* ESRefractionExamSetup.app */;
 			productType = "com.apple.product-type.application";
 		};
+		514FC1DB29360A9F00118912 /* ESRefractionExamSetupTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 514FC1E229360A9F00118912 /* Build configuration list for PBXNativeTarget "ESRefractionExamSetupTests" */;
+			buildPhases = (
+				514FC1D829360A9F00118912 /* Sources */,
+				514FC1D929360A9F00118912 /* Frameworks */,
+				514FC1DA29360A9F00118912 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				514FC1E129360A9F00118912 /* PBXTargetDependency */,
+			);
+			name = ESRefractionExamSetupTests;
+			productName = ESRefractionExamSetupTests;
+			productReference = 514FC1DC29360A9F00118912 /* ESRefractionExamSetupTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		514FC1E829360AAB00118912 /* ESRefractionExamSetupUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 514FC1F129360AAB00118912 /* Build configuration list for PBXNativeTarget "ESRefractionExamSetupUITests" */;
+			buildPhases = (
+				514FC1E529360AAB00118912 /* Sources */,
+				514FC1E629360AAB00118912 /* Frameworks */,
+				514FC1E729360AAB00118912 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				514FC1F029360AAB00118912 /* PBXTargetDependency */,
+			);
+			name = ESRefractionExamSetupUITests;
+			productName = ESRefractionExamSetupUITests;
+			productReference = 514FC1E929360AAB00118912 /* ESRefractionExamSetupUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -99,6 +213,14 @@
 				TargetAttributes = {
 					514FC1C02935F06F00118912 = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					514FC1DB29360A9F00118912 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 514FC1C02935F06F00118912;
+					};
+					514FC1E829360AAB00118912 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 514FC1C02935F06F00118912;
 					};
 				};
 			};
@@ -116,6 +238,8 @@
 			projectRoot = "";
 			targets = (
 				514FC1C02935F06F00118912 /* ESRefractionExamSetup */,
+				514FC1DB29360A9F00118912 /* ESRefractionExamSetupTests */,
+				514FC1E829360AAB00118912 /* ESRefractionExamSetupUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -131,6 +255,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		514FC1DA29360A9F00118912 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		514FC1E729360AAB00118912 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -139,12 +277,48 @@
 			buildActionMask = 2147483647;
 			files = (
 				514FC1C92935F06F00118912 /* ViewController.swift in Sources */,
+				514FC1F72937380700118912 /* MotionService.swift in Sources */,
+				514FC1F9293738BD00118912 /* MotionServiceError.swift in Sources */,
+				514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */,
 				514FC1C52935F06F00118912 /* AppDelegate.swift in Sources */,
 				514FC1C72935F06F00118912 /* SceneDelegate.swift in Sources */,
+				514FC1FF2937667400118912 /* MotionSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		514FC1D829360A9F00118912 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */,
+				514FC1DF29360A9F00118912 /* ESRefractionExamSetupTests.swift in Sources */,
+				514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		514FC1E529360AAB00118912 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				514FC1EE29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift in Sources */,
+				514FC1EC29360AAB00118912 /* ESRefractionExamSetupUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		514FC1E129360A9F00118912 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 514FC1C02935F06F00118912 /* ESRefractionExamSetup */;
+			targetProxy = 514FC1E029360A9F00118912 /* PBXContainerItemProxy */;
+		};
+		514FC1F029360AAB00118912 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 514FC1C02935F06F00118912 /* ESRefractionExamSetup */;
+			targetProxy = 514FC1EF29360AAB00118912 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		514FC1CA2935F06F00118912 /* Main.storyboard */ = {
@@ -293,8 +467,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +478,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -321,8 +500,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +511,82 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		514FC1E329360A9F00118912 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetupTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESRefractionExamSetup.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ESRefractionExamSetup";
+			};
+			name = Debug;
+		};
+		514FC1E429360A9F00118912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetupTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ESRefractionExamSetup.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ESRefractionExamSetup";
+			};
+			name = Release;
+		};
+		514FC1F229360AAB00118912 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetupUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ESRefractionExamSetup;
+			};
+			name = Debug;
+		};
+		514FC1F329360AAB00118912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elenaSlovushch.ESRefractionExamSetupUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ESRefractionExamSetup;
 			};
 			name = Release;
 		};
@@ -353,6 +607,24 @@
 			buildConfigurations = (
 				514FC1D62935F07100118912 /* Debug */,
 				514FC1D72935F07100118912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		514FC1E229360A9F00118912 /* Build configuration list for PBXNativeTarget "ESRefractionExamSetupTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				514FC1E329360A9F00118912 /* Debug */,
+				514FC1E429360A9F00118912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		514FC1F129360AAB00118912 /* Build configuration list for PBXNativeTarget "ESRefractionExamSetupUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				514FC1F229360AAB00118912 /* Debug */,
+				514FC1F329360AAB00118912 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
