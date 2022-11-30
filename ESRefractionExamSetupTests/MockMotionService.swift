@@ -18,6 +18,10 @@ class MockMotionService: MotionServiceBase {
     var motionIntervalSetExpectation: XCTestExpectation?
     var motionIntervalSetCallCounter = 0
     
+    override init(motionManager: CMMotionManager! = CMMotionManager(), positionPublisher: PassthroughSubject<Double, MotionServiceBase.T>! = PassthroughSubject<Double,T>(), isDeviceMotionAvailable: Bool = true, motionUpdateInterval: Double = MotionSettings.motionUpdateInterval) {
+        
+        super.init(motionManager: motionManager)
+    }
     
     override func isMotionUpdateIntervalSet() -> (Bool, T?) {
         self.motionIntervalSetCallCounter += 1

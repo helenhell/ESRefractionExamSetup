@@ -36,6 +36,7 @@ class MotionServiceBase: MotionServiceProtocol {
     init(motionManager: CMMotionManager! = CMMotionManager(), positionPublisher: PassthroughSubject<Double, T>! = PassthroughSubject<Double,T>(), isDeviceMotionAvailable: Bool = true, motionUpdateInterval: Double = MotionSettings.motionUpdateInterval) {
         self.motionManager = motionManager
         self.positionPublisher = positionPublisher
+        self.positionPublisher.subscribe(AngleSubscriber())
         self.isDeviceMotionAvailable = isDeviceMotionAvailable
         self.motionManager.deviceMotionUpdateInterval = motionUpdateInterval
     }
@@ -61,7 +62,7 @@ class MotionServiceBase: MotionServiceProtocol {
             
             let degrees = self.convertToDegrees(pitch: attitude.pitch)
             self.positionPublisher.send(degrees)
-            self.positionPublisher.send(completion: .finished)
+            //self.positionPublisher.send(completion: .finished)
         }
         return self.positionPublisher.eraseToAnyPublisher()
     }
@@ -76,4 +77,24 @@ class MotionServiceBase: MotionServiceProtocol {
     func convertToDegrees(pitch: Double) -> Double {
         return pitch * 180.0/Double.pi
     }
+}
+
+
+class AngleSubscriber: Subscriber {
+    
+    typealias Input = Double
+    typealias Failure = MotionServiceError
+    
+    func receive(subscription: Subscription) {
+        subscription.request(.unlimited)
+    }
+    
+    func receive(_ input: Double) -> Subscribers.Demand {
+        return .unlimited
+    }
+    
+    func receive(completion: Subscribers.Completion<MotionServiceError>) {
+        //
+    }
+     
 }

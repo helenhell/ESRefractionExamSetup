@@ -82,4 +82,52 @@ final class MotionServiceTests: XCTestCase {
         XCTAssertFalse(result.0, "When motion update interval is set to incorrect value isMotionUpdateIntervalSet() method should return false")
         
     }
+    
+    func testMotionService_WhenMotionUpdateFails_ReturnsSpecificError() {
+        
+        //Arrange
+        let motionManager = MockMotionManager()
+        motionManager.error = MotionServiceError.motionUpdateFailed
+        sut = MockMotionService(motionManager: motionManager)
+        //Act
+        sut.getDevicePosition()
+            //Assert
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    XCTAssertEqual(error, MotionServiceError.motionUpdateFailed, "When motion update fails, MotionService's getDevicePosition() method should send completion with MotionServiceError.motionUpdateFailed error")
+                case .finished:
+                    XCTFail("When motion update fails MotionService's getDevicePosition() method should send completion with error")
+                }
+            } receiveValue: { value in
+                XCTFail("When motion update fails MotionService's getDevicePosition() method should send no value")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func testMotionService_WhenMotionUpdateSucceeds_ReturnsValue() {
+        
+        //Arrange
+        let motionManager = MockMotionManager()
+        sut = MockMotionService(motionManager: motionManager)
+        let expectation = expectation(description: "Expecting angle value")
+        //Act
+        var receivedValue: Double?
+        sut.getDevicePosition()
+            //Assert
+            .sink { completion in
+                switch completion {
+                case .failure(_):
+                    XCTFail("When motion update succeeds, MotionService's getDevicePosition() method should send completion with no error")
+                case .finished:
+                    XCTAssertNotNil(receivedValue, "When motion succeeds MotionService's getDevicePosition() method should send value")
+                }
+            } receiveValue: { value in
+                receivedValue = value
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 2)
+    }
 }
