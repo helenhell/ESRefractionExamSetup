@@ -14,6 +14,7 @@ import Combine
 class ViewController: UIViewController {
     
     var motionManager: CMMotionManager?
+    
     private let captureSession = AVCaptureSession()
     private lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     private let videoDataOutput = AVCaptureVideoDataOutput()
@@ -32,7 +33,7 @@ class ViewController: UIViewController {
         self.showCameraFeed()
         self.getCameraFrames()
         DispatchQueue.global().async {
-            self.captureSession.startRunning()
+            //self.captureSession.startRunning()
         }
         
         positionObserver.filter { value in
@@ -43,7 +44,7 @@ class ViewController: UIViewController {
         }
         .store(in: &cancellables)
         
-        self.viewModel = ViewModel()
+        //self.viewModel = ViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,35 +58,35 @@ class ViewController: UIViewController {
         }
     }
     
-    func setupPosition() {
-        
-        self.motionManager = CMMotionManager()
-
-        if motionManager?.isDeviceMotionAvailable == true {
-                
-            motionManager?.deviceMotionUpdateInterval = 1
-                
-            let queue = OperationQueue()
-            motionManager?.startDeviceMotionUpdates(to: queue, withHandler: { [weak self] motion, error in
-                    
-                // Get the attitude of the device
-                if let attitude = motion?.attitude {
-                    // Get the pitch (in radians) and convert to degrees.
-                    //print(attitude.pitch * 180.0/Double.pi)
-                    let degrees = attitude.pitch * 180.0/Double.pi
-                    self?.positionObserver.send(degrees)
-                    DispatchQueue.main.async {
-                        // Update some UI
-                    }
-                }
-                    
-            })
-                
-            print("Device motion started")
-        }else {
-            print("Device motion unavailable")
-        }
-    }
+//    func setupPosition() {
+//
+//        self.motionManager = CMMotionManager()
+//
+//        if motionManager?.isDeviceMotionAvailable == true {
+//
+//            motionManager?.deviceMotionUpdateInterval = 1
+//
+//            let queue = OperationQueue()
+//            motionManager?.startDeviceMotionUpdates(to: queue, withHandler: { [weak self] motion, error in
+//
+//                // Get the attitude of the device
+//                if let attitude = motion?.attitude {
+//                    // Get the pitch (in radians) and convert to degrees.
+//                    //print(attitude.pitch * 180.0/Double.pi)
+//                    let degrees = attitude.pitch * 180.0/Double.pi
+//                    self?.positionObserver.send(degrees)
+//                    DispatchQueue.main.async {
+//                        // Update some UI
+//                    }
+//                }
+//
+//            })
+//
+//            print("Device motion started")
+//        }else {
+//            print("Device motion unavailable")
+//        }
+//    }
     
     
     private func addCameraInput() {
@@ -130,9 +131,9 @@ class ViewController: UIViewController {
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
                 if let results = request.results as? [VNFaceObservation], results.count > 0 {
-                    //print("did detect \(results.count) face(s)")
+                    print("did detect \(results.count) face(s)")
                 } else {
-                    //print("did not detect any face")
+                    print("did not detect any face")
                 }
             }
         })

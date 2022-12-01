@@ -23,6 +23,8 @@ protocol MotionServiceProtocol<T> where T: Error {
     func convertToDegrees(pitch: Double) -> Double
 }
 
+
+
 class MotionServiceBase: MotionServiceProtocol {
     
     typealias T = MotionServiceError

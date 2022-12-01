@@ -24,6 +24,12 @@
 		514FC2012937D94800118912 /* MockMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC2002937D94800118912 /* MockMotionManager.swift */; };
 		514FC204293889F600118912 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC203293889F600118912 /* ViewModelTests.swift */; };
 		514FC2062938936300118912 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC2052938936300118912 /* ViewModel.swift */; };
+		51BC878D2938CE2800A932D8 /* FaceDetectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC878C2938CE2800A932D8 /* FaceDetectionServiceTests.swift */; };
+		51BC878F2938F86300A932D8 /* FaceDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC878E2938F86300A932D8 /* FaceDetectionService.swift */; };
+		51BC87912938F8F900A932D8 /* FaceDetectionServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87902938F8F900A932D8 /* FaceDetectionServiceError.swift */; };
+		51BC87952938FDA800A932D8 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87942938FDA800A932D8 /* FaceDetector.swift */; };
+		51BC879729390F6D00A932D8 /* FaceDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC879629390F6D00A932D8 /* FaceDetectorProtocol.swift */; };
+		51BC87992939103100A932D8 /* MockFaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87982939103100A932D8 /* MockFaceDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +71,12 @@
 		514FC2002937D94800118912 /* MockMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionManager.swift; sourceTree = "<group>"; };
 		514FC203293889F600118912 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		514FC2052938936300118912 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		51BC878C2938CE2800A932D8 /* FaceDetectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionServiceTests.swift; sourceTree = "<group>"; };
+		51BC878E2938F86300A932D8 /* FaceDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionService.swift; sourceTree = "<group>"; };
+		51BC87902938F8F900A932D8 /* FaceDetectionServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionServiceError.swift; sourceTree = "<group>"; };
+		51BC87942938FDA800A932D8 /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
+		51BC879629390F6D00A932D8 /* FaceDetectorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectorProtocol.swift; sourceTree = "<group>"; };
+		51BC87982939103100A932D8 /* MockFaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFaceDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,13 +127,11 @@
 		514FC1C32935F06F00118912 /* ESRefractionExamSetup */ = {
 			isa = PBXGroup;
 			children = (
+				51BC87932938F94100A932D8 /* FaceDetectionService */,
+				51BC87922938F92400A932D8 /* MotionService */,
 				514FC1C42935F06F00118912 /* AppDelegate.swift */,
 				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
 				514FC1C82935F06F00118912 /* ViewController.swift */,
-				514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */,
-				514FC1F62937380700118912 /* MotionService.swift */,
-				514FC1F8293738BD00118912 /* MotionServiceError.swift */,
-				514FC1FE2937667400118912 /* MotionSettings.swift */,
 				514FC1CA2935F06F00118912 /* Main.storyboard */,
 				514FC1CD2935F07100118912 /* Assets.xcassets */,
 				514FC1CF2935F07100118912 /* LaunchScreen.storyboard */,
@@ -134,6 +144,7 @@
 		514FC1DD29360A9F00118912 /* ESRefractionExamSetupTests */ = {
 			isa = PBXGroup;
 			children = (
+				51BC878B2938CE0300A932D8 /* FaceDetectionServiceTests */,
 				514FC202293889C400118912 /* MotionServiceTests */,
 				514FC203293889F600118912 /* ViewModelTests.swift */,
 			);
@@ -157,6 +168,37 @@
 				514FC1F4293733FF00118912 /* MotionServiceTests.swift */,
 			);
 			path = MotionServiceTests;
+			sourceTree = "<group>";
+		};
+		51BC878B2938CE0300A932D8 /* FaceDetectionServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				51BC878C2938CE2800A932D8 /* FaceDetectionServiceTests.swift */,
+				51BC87982939103100A932D8 /* MockFaceDetector.swift */,
+			);
+			path = FaceDetectionServiceTests;
+			sourceTree = "<group>";
+		};
+		51BC87922938F92400A932D8 /* MotionService */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1FE2937667400118912 /* MotionSettings.swift */,
+				514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */,
+				514FC1F8293738BD00118912 /* MotionServiceError.swift */,
+				514FC1F62937380700118912 /* MotionService.swift */,
+			);
+			path = MotionService;
+			sourceTree = "<group>";
+		};
+		51BC87932938F94100A932D8 /* FaceDetectionService */ = {
+			isa = PBXGroup;
+			children = (
+				51BC87902938F8F900A932D8 /* FaceDetectionServiceError.swift */,
+				51BC878E2938F86300A932D8 /* FaceDetectionService.swift */,
+				51BC87942938FDA800A932D8 /* FaceDetector.swift */,
+				51BC879629390F6D00A932D8 /* FaceDetectorProtocol.swift */,
+			);
+			path = FaceDetectionService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,14 +332,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BC879729390F6D00A932D8 /* FaceDetectorProtocol.swift in Sources */,
 				514FC1C92935F06F00118912 /* ViewController.swift in Sources */,
+				51BC87952938FDA800A932D8 /* FaceDetector.swift in Sources */,
 				514FC1F72937380700118912 /* MotionService.swift in Sources */,
 				514FC1F9293738BD00118912 /* MotionServiceError.swift in Sources */,
+				51BC878F2938F86300A932D8 /* FaceDetectionService.swift in Sources */,
 				514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */,
 				514FC1C52935F06F00118912 /* AppDelegate.swift in Sources */,
 				514FC1C72935F06F00118912 /* SceneDelegate.swift in Sources */,
 				514FC2062938936300118912 /* ViewModel.swift in Sources */,
 				514FC1FF2937667400118912 /* MotionSettings.swift in Sources */,
+				51BC87912938F8F900A932D8 /* FaceDetectionServiceError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +355,8 @@
 				514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */,
 				514FC204293889F600118912 /* ViewModelTests.swift in Sources */,
 				514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */,
+				51BC87992939103100A932D8 /* MockFaceDetector.swift in Sources */,
+				51BC878D2938CE2800A932D8 /* FaceDetectionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
