@@ -12,14 +12,23 @@ import CoreMotion
 class MockMotionManager: CMMotionManager {
     
     var error: Error?
+    var timer: Timer?
     
     override func startDeviceMotionUpdates(to queue: OperationQueue, withHandler handler: @escaping CMDeviceMotionHandler) {
         
         if let error = self.error {
             handler(MockMotion(), error)
         } else {
-            handler(MockMotion(), nil)
+            timer = Timer.scheduledTimer(withTimeInterval: self.deviceMotionUpdateInterval, repeats: true, block: { timer in
+                handler(MockMotion(), nil)
+            })
+            
+            timer?.fire()
         }
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
 }
 

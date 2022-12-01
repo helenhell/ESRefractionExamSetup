@@ -22,6 +22,8 @@
 		514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */; };
 		514FC1FF2937667400118912 /* MotionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FE2937667400118912 /* MotionSettings.swift */; };
 		514FC2012937D94800118912 /* MockMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC2002937D94800118912 /* MockMotionManager.swift */; };
+		514FC204293889F600118912 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC203293889F600118912 /* ViewModelTests.swift */; };
+		514FC2062938936300118912 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC2052938936300118912 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceProtocol.swift; sourceTree = "<group>"; };
 		514FC1FE2937667400118912 /* MotionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionSettings.swift; sourceTree = "<group>"; };
 		514FC2002937D94800118912 /* MockMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionManager.swift; sourceTree = "<group>"; };
+		514FC203293889F600118912 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		514FC2052938936300118912 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				514FC1CD2935F07100118912 /* Assets.xcassets */,
 				514FC1CF2935F07100118912 /* LaunchScreen.storyboard */,
 				514FC1D22935F07100118912 /* Info.plist */,
+				514FC2052938936300118912 /* ViewModel.swift */,
 			);
 			path = ESRefractionExamSetup;
 			sourceTree = "<group>";
@@ -129,9 +134,8 @@
 		514FC1DD29360A9F00118912 /* ESRefractionExamSetupTests */ = {
 			isa = PBXGroup;
 			children = (
-				514FC1FA29374E4E00118912 /* MockMotionService.swift */,
-				514FC2002937D94800118912 /* MockMotionManager.swift */,
-				514FC1F4293733FF00118912 /* MotionServiceTests.swift */,
+				514FC202293889C400118912 /* MotionServiceTests */,
+				514FC203293889F600118912 /* ViewModelTests.swift */,
 			);
 			path = ESRefractionExamSetupTests;
 			sourceTree = "<group>";
@@ -143,6 +147,16 @@
 				514FC1ED29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift */,
 			);
 			path = ESRefractionExamSetupUITests;
+			sourceTree = "<group>";
+		};
+		514FC202293889C400118912 /* MotionServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1FA29374E4E00118912 /* MockMotionService.swift */,
+				514FC2002937D94800118912 /* MockMotionManager.swift */,
+				514FC1F4293733FF00118912 /* MotionServiceTests.swift */,
+			);
+			path = MotionServiceTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +296,7 @@
 				514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */,
 				514FC1C52935F06F00118912 /* AppDelegate.swift in Sources */,
 				514FC1C72935F06F00118912 /* SceneDelegate.swift in Sources */,
+				514FC2062938936300118912 /* ViewModel.swift in Sources */,
 				514FC1FF2937667400118912 /* MotionSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +307,7 @@
 			files = (
 				514FC2012937D94800118912 /* MockMotionManager.swift in Sources */,
 				514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */,
+				514FC204293889F600118912 /* ViewModelTests.swift in Sources */,
 				514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

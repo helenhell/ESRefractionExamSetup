@@ -19,8 +19,7 @@ class MockMotionService: MotionServiceBase {
     var motionIntervalSetCallCounter = 0
     
     override init(motionManager: CMMotionManager! = CMMotionManager(), positionPublisher: PassthroughSubject<Double, MotionServiceBase.T>! = PassthroughSubject<Double,T>(), isDeviceMotionAvailable: Bool = true, motionUpdateInterval: Double = MotionSettings.motionUpdateInterval) {
-        
-        super.init(motionManager: motionManager)
+        super.init(motionManager: motionManager, motionUpdateInterval: motionUpdateInterval)
     }
     
     override func isMotionUpdateIntervalSet() -> (Bool, T?) {

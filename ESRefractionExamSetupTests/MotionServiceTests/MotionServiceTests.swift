@@ -16,11 +16,11 @@ final class MotionServiceTests: XCTestCase {
     
     override func setUpWithError() throws {
         sut = MockMotionService()
-        cancellables = []
+        cancellables = Set<AnyCancellable>()
     }
 
     override func tearDownWithError() throws {
-        cancellables = nil
+        cancellables = []
         sut = nil
     }
 
@@ -29,7 +29,7 @@ final class MotionServiceTests: XCTestCase {
         sut = MockMotionService(isDeviceMotionAvailable: false)
         
         //Act
-        sut.getDevicePosition()
+        sut.positionPublisher
             // Assert
             .sink { completion in
                 switch completion {
@@ -42,6 +42,7 @@ final class MotionServiceTests: XCTestCase {
                 XCTFail("When device motion is unavailable should receive no value")
             }
             .store(in: &cancellables)
+        sut.getDevicePosition()
     }
 
     func testMotionService_BeforeMotionUpdatesStarted_updateIntervalIsSetCheckIsPerformed() {
@@ -89,8 +90,9 @@ final class MotionServiceTests: XCTestCase {
         let motionManager = MockMotionManager()
         motionManager.error = MotionServiceError.motionUpdateFailed
         sut = MockMotionService(motionManager: motionManager)
+        
         //Act
-        sut.getDevicePosition()
+        sut.positionPublisher
             //Assert
             .sink { completion in
                 switch completion {
@@ -103,31 +105,37 @@ final class MotionServiceTests: XCTestCase {
                 XCTFail("When motion update fails MotionService's getDevicePosition() method should send no value")
             }
             .store(in: &cancellables)
+        sut.getDevicePosition()
     }
     
-    func testMotionService_WhenMotionUpdateSucceeds_ReturnsValue() {
+    func testMotionService_WhenMotionUpdateSucceeds_ReturnsValuesAccordingToUpdateInterval() {
         
         //Arrange
         let motionManager = MockMotionManager()
         sut = MockMotionService(motionManager: motionManager)
-        let expectation = expectation(description: "Expecting angle value")
+        let expectation = expectation(description: "waiting for values")
+        
         //Act
-        var receivedValue: Double?
-        sut.getDevicePosition()
-            //Assert
+        var receivedValues: [Double] = []
+        sut.positionPublisher
             .sink { completion in
-                switch completion {
-                case .failure(_):
-                    XCTFail("When motion update succeeds, MotionService's getDevicePosition() method should send completion with no error")
-                case .finished:
-                    XCTAssertNotNil(receivedValue, "When motion succeeds MotionService's getDevicePosition() method should send value")
+                guard case .finished = completion else {
+                    return
                 }
-            } receiveValue: { value in
-                receivedValue = value
                 expectation.fulfill()
+            } receiveValue: { value in
+                receivedValues.append(value)
             }
             .store(in: &cancellables)
         
-        wait(for: [expectation], timeout: 2)
+        sut.getDevicePosition()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+5) { [weak self] in
+            self?.sut.positionPublisher.send(completion: .finished)
+        }
+        wait(for: [expectation], timeout: 5.1)
+        
+        //Assert
+        XCTAssertGreaterThanOrEqual(receivedValues.count, 5, "should receive values")
     }
 }

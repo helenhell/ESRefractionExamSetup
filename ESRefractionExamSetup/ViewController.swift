@@ -22,10 +22,12 @@ class ViewController: UIViewController {
     
     var cancellables: [AnyCancellable] = []
     
+    var viewModel: ViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupPosition()
+        //self.setupPosition()
         self.addCameraInput()
         self.showCameraFeed()
         self.getCameraFrames()
@@ -40,6 +42,8 @@ class ViewController: UIViewController {
             print("ANGLE IS WITHIN LIMITS, ANGLE = \(value)")
         }
         .store(in: &cancellables)
+        
+        self.viewModel = ViewModel()
     }
     
     override func viewDidLayoutSubviews() {
