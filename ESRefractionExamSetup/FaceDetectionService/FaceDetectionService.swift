@@ -10,25 +10,41 @@ import Combine
 
 class FaceDetectionService {
     
-    var detectionPublisher: PassthroughSubject<Bool, FaceDetectionServiceError>!
+    var detectionPublisher: FaceDetectionSubject!
     var faceDetector: FaceDetectorProtocol!
     
-    init(detectionPublisher: PassthroughSubject<Bool, FaceDetectionServiceError>! = PassthroughSubject<Bool, FaceDetectionServiceError>(), faceDetector: FaceDetectorProtocol! = FaceDetector()) {
+    var subscriptions: Set<AnyCancellable> = []
+    
+    init(detectionPublisher: FaceDetectionSubject = FaceDetectionSubject(), faceDetector: FaceDetectorProtocol!) {
         self.detectionPublisher = detectionPublisher
         self.faceDetector = faceDetector
+        
     }
     
+    deinit {
+        self.subscriptions.forEach {
+            $0.cancel()
+        }
+    }
     
     func detectFace() {
+        
+       self.faceDetector.resultPublisher.sink { completion in
+            switch completion {
+            case .failure(let error):
+                self.detectionPublisher.send(completion: .failure(error))
+            case .finished:
+                self.detectionPublisher.send(completion: .finished)
+            }
+            
+        } receiveValue: { result in
+            
+            self.detectionPublisher.send(result)
+            self.detectionPublisher.send(completion: .finished)
+        }
+        .store(in: &subscriptions)
+
         self.faceDetector.performFaceDetection()
-        self.detectionPublisher.send(completion: .failure(.faceNotDetected))
-//
-//        let detected = self.faceDetector.performFaceDetection()
-//        guard detected else {
-//            self.detectionPublisher.send(completion: .failure(.faceNotDetected))
-//            return
-//        }
-//        self.detectionPublisher.send(detected)
     }
     
 }

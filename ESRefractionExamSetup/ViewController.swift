@@ -29,12 +29,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //self.setupPosition()
-        self.addCameraInput()
-        self.showCameraFeed()
-        self.getCameraFrames()
-        DispatchQueue.global().async {
-            //self.captureSession.startRunning()
-        }
+//        self.addCameraInput()
+//        self.showCameraFeed()
+//        self.getCameraFrames()
+//        DispatchQueue.global().async {
+//            self.captureSession.startRunning()
+//        }
         
         positionObserver.filter { value in
             (70.0...90.0).contains(value)
@@ -44,7 +44,9 @@ class ViewController: UIViewController {
         }
         .store(in: &cancellables)
         
-        //self.viewModel = ViewModel()
+        self.viewModel = ViewModel(viewDelegate: self)
+        self.viewModel.getDevicePosition()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -144,6 +146,30 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    
+}
+
+extension ViewController: ViewModelDelegateProtocol {
+    
+    func didCompleteDevicePositionSetup() {
+        print("DEVICE SET UP")
+        if self.viewModel.state == .devicePositioned {
+            self.viewModel.detectFace()
+        }
+    }
+    
+    func didFinishDevicePositionSetup(with error: MotionServiceError) {
+        print(error)
+    }
+    
+    func didCompleteFaceDetection() {
+        print("FACE DETECTED")
+    }
+    
+    func didFinishFaceDetection(with error: FaceDetectionServiceError) {
+        print(error)
+    }
     
     
 }

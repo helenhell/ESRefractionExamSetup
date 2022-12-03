@@ -18,7 +18,7 @@ protocol MotionServiceProtocol<T> where T: Error {
     var isDeviceMotionAvailable: Bool { get }
     
     
-    func getDevicePosition() //-> AnyPublisher<Double, T>
+    func getDevicePosition()
     func isMotionUpdateIntervalSet() -> (Bool, T?)
     func convertToDegrees(pitch: Double) -> Double
 }
@@ -64,7 +64,6 @@ class MotionServiceBase: MotionServiceProtocol {
             let degrees = _self.convertToDegrees(pitch: attitude.pitch)
             _self.positionPublisher.send(degrees)
             print("**********POSITION = \(degrees)")
-            //self.positionPublisher.send(completion: .finished)
         }
     }
     

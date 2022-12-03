@@ -6,8 +6,13 @@
 //
 
 import Foundation
+import AVFoundation
+import Combine
+
+typealias FaceDetectionSubject = PassthroughSubject<FaceDetectionResult, FaceDetectionServiceError>
 
 protocol FaceDetectorProtocol: NSObject {
-    
-    func performFaceDetection ()
+    var captureSession: AVCaptureSession! { get }
+    var resultPublisher: FaceDetectionSubject! { get }
+    func performFaceDetection()
 }

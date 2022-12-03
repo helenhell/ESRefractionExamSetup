@@ -12,23 +12,12 @@ import Combine
 
 class FaceDetector: NSObject, FaceDetectorProtocol {
     
-    typealias FaceDetectorResult = (Bool, Int)
+    private(set) var captureSession:AVCaptureSession!
+    let resultPublisher: FaceDetectionSubject!
     
-    private let captureSession:AVCaptureSession!
-    let detectionResultPublisher: PassthroughSubject<FaceDetectorResult, FaceDetectionServiceError>
-    
-    private var subscriptions: Set<AnyCancellable> = []
-
-    init(captureSession: AVCaptureSession! = AVCaptureSession(), resultPublisher: PassthroughSubject<FaceDetectorResult, FaceDetectionServiceError>! = PassthroughSubject<FaceDetectorResult, FaceDetectionServiceError>()) {
+    init(captureSession: AVCaptureSession! = AVCaptureSession(), resultPublisher: FaceDetectionSubject! = FaceDetectionSubject()) {
         self.captureSession = captureSession
-        self.detectionResultPublisher = resultPublisher
-        
-    }
-    
-    deinit {
-        subscriptions.forEach {
-            $0.cancel()
-        }
+        self.resultPublisher = resultPublisher
     }
     
     func cameraFeedPreviewLayer() -> AVCaptureVideoPreviewLayer {
@@ -38,23 +27,19 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
     func performFaceDetection () {
         self.captureSession.addInput(self.cameraInput())
         self.captureSession.addOutput(self.cameraOutput())
-        self.detectionResultPublisher.sink { completion in
-            print("FACE DETECTOR COMPLETION = \(completion)")
-        } receiveValue: { value in
-            print("FACE DETECTOR VALUE = \(value)")
+        DispatchQueue.global().async {
+            self.captureSession.startRunning()
         }
-        .store(in: &subscriptions)
-        self.captureSession.startRunning()
     }
-    
-    
     
     private func cameraInput() -> AVCaptureDeviceInput {
         guard let device = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
             mediaType: .video,
             position: .front).devices.first else {
-               fatalError("No back camera device found, please make sure to run SimpleLaneDetection in an iOS device and not a simulator")
+            self.resultPublisher.send(completion: .failure(.noCameraFound))
+            //return false
+            fatalError("No back camera found")
         }
         let cameraInput = try! AVCaptureDeviceInput(device: device)
         return cameraInput
@@ -78,19 +63,16 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
     }
     
     private func performDetectionRequest(in image: CVPixelBuffer) {
-        
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
                 guard error == nil else {
-                    self.detectionResultPublisher.send(completion: .failure(.detectionRequestFailed))
+                    self.resultPublisher.send(completion: .failure(.detectionRequestFailed))
                     return
                 }
                 if let results = request.results as? [VNFaceObservation], results.count > 0 {
-                    print("did detect \(results.count) face(s)")
-                    self.detectionResultPublisher.send((true, results.count) )
+                    self.resultPublisher.send(.detectedFaces(number: results.count))
                 } else {
-                    print("did not detect any face")
-                    self.detectionResultPublisher.send((false, 0))
+                    self.resultPublisher.send(.noFaceDetected)
                 }
             }
         })
@@ -105,7 +87,7 @@ extension FaceDetector: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         
         guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            self.detectionResultPublisher.send(completion: .failure(.capturingOutputFailed))
+            self.resultPublisher.send(completion: .failure(.capturingOutputFailed))
             return
         }
         self.performDetectionRequest(in: frame)

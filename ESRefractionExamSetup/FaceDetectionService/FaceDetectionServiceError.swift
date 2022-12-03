@@ -9,7 +9,7 @@ import Foundation
 
 enum FaceDetectionServiceError: Error {
     
-    case faceNotDetected
+    case noCameraFound
     case detectionRequestFailed
     case capturingOutputFailed
 }

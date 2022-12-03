@@ -29,4 +29,5 @@ class MockMotionService: MotionServiceBase {
         return super.isMotionUpdateIntervalSet()
     }
     
+    
 }
