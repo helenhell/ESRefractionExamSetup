@@ -9,10 +9,7 @@ import Foundation
 
 protocol ViewModelDelegateProtocol {
     
-    func didCompleteDevicePositionSetup()
-    func didFinishDevicePositionSetup(with error: MotionServiceError)
-    func didCompleteFaceDetection()
-    func didFinishFaceDetection(with error: FaceDetectionServiceError)
-    func handleViewUpdate(labelText: String, buttonTitle: String, buttonEnabled: Bool)
+    func displayErrorALert(with message: String)
+    func handleViewUpdate(with viewDetails: ViewDetails)
     
 }

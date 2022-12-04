@@ -24,12 +24,19 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
         return self.cameraFeedPreviewLayer(for: self.captureSession)
     }
     
-    func performFaceDetection () {
+    func performFaceDetection() {
+        if let input = self.captureSession.inputs.last {
+            self.captureSession.removeInput(input)
+        }
         self.captureSession.addInput(self.cameraInput())
         self.captureSession.addOutput(self.cameraOutput())
         DispatchQueue.global().async {
             self.captureSession.startRunning()
         }
+    }
+    
+    func stopFaceDetection() {
+        self.captureSession.stopRunning()
     }
     
     private func cameraInput() -> AVCaptureDeviceInput {
@@ -38,7 +45,6 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
             mediaType: .video,
             position: .front).devices.first else {
             self.resultPublisher.send(completion: .failure(.noCameraFound))
-            //return false
             fatalError("No back camera found")
         }
         let cameraInput = try! AVCaptureDeviceInput(device: device)
@@ -76,6 +82,7 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
                 }
             }
         })
+        
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
         try? imageRequestHandler.perform([faceDetectionRequest])
     }

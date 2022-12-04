@@ -10,56 +10,57 @@ import Combine
 
 class ViewModel {
     
-    var motionService: MotionServiceBase!
-    var faceDetectionService: FaceDetectionService!
-    var subscriptions: Set<AnyCancellable> = []
+    private var motionService: MotionServiceBase!
+    private var faceDetectionService: FaceDetectionService!
+    private var subscriptions: Set<AnyCancellable> = []
     
-    var delegate: ViewModelDelegateProtocol?
-    var state: ViewModelState = .setupStart {
+    private var delegate: ViewModelDelegateProtocol?
+    private var state: ViewModelState = .setupStart {
         didSet {
             self.updateView(for: self.state)
         }
     }
-    var angleUpdates: [Double] = []
+    private var angleUpdates: [Double] = []
     
     init(motionService: MotionServiceBase! = MotionService(), faceDetectionService: FaceDetectionService! = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
         
         self.delegate = viewDelegate
         self.updateView(for: self.state)
+        
         self.motionService = motionService
         self.motionService.positionPublisher
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
                 if case .failure(let error) = completion {
-                    self.delegate?.didFinishDevicePositionSetup(with: error)
+                    self.handleError(error)
                 }
             } receiveValue: { value in
-                print("**********POSITION RECEIVED = \(value)")
-                // TODO: check range
                 if self.isDevicePositionStable(with: value) {
                     self.state = self.state.next
                     self.motionService.stopMotionUpdates()
                     self.angleUpdates = []
-//                    if self.state == .devicePositioned {
-//                        self.detectFace()
-//                    }
-                    self.delegate?.didCompleteDevicePositionSetup()
                 }
             }
             .store(in: &subscriptions)
         
         self.faceDetectionService = faceDetectionService
         self.faceDetectionService.detectionPublisher
+            .first(where: { $0 == .detectedFaces(number: 1) })
             .sink { completion in
                 if case .failure(let error) = completion {
-                    self.delegate?.didFinishFaceDetection(with: error)
+                    self.handleError(error)
                 }
             } receiveValue: { result in
                 print(result)
-                self.motionService.startMotionUpdates()
-                self.delegate?.didCompleteFaceDetection()
-                self.state = self.state.next
+                switch result {
+                case .detectedFaces(number: _):
+                    // TODO: Handle use case when more than one case detected
+                    self.state = self.state.next
+                    self.faceDetectionService.stopFaceDetection()
+                case .noFaceDetected:
+                    break
+                }
             }
             .store(in: &subscriptions)
 
@@ -71,30 +72,43 @@ class ViewModel {
         }
     }
     
-    func getDevicePosition() {
-        self.state = self.state.next
-        self.motionService.getDevicePosition()
-    }
-    
-    func detectFace() {
-        self.faceDetectionService.detectFace()
-    }
-    
-    func updateView(for state: ViewModelState) {
-        print("STATE = \(self.state), ISTRUCTION = \(state.instructionText), BUTTON = \(state.buttonTitle), BUTTON ENABLED = \(state.buttonEnabled)")
-        self.delegate?.handleViewUpdate(labelText: state.instructionText, buttonTitle: state.buttonTitle, buttonEnabled: state.buttonEnabled)
-    }
-    
     func handleButtonTap() {
+        guard self.state.buttonEnabled else {
+            return
+        }
         if self.state == .setupStart {
             self.getDevicePosition()
         } else if self.state == .devicePositioned {
             self.detectFace()
+        } else if self.state == .faceDetected {
+            self.getDevicePosition()
+        } else if self.state == .devicePositionedFaceDetected || self.state == .setupComplete {
+            self.state = .setupStart
         }
     }
     
-    func isDevicePositionStable(with angle: Double) -> Bool {
-        
+    private func getDevicePosition() {
+        self.state = self.state.next
+        self.motionService.getDevicePosition()
+    }
+    
+    private func detectFace() {
+        self.state = self.state.next
+        self.faceDetectionService.detectFace()
+    }
+    
+    private func handleError(_ error: SetupError) {
+        self.state = .errorOccured
+        self.updateView(for: self.state)
+        self.delegate?.displayErrorALert(with: error.message)
+    }
+    
+    private func updateView(for state: ViewModelState) {
+        let viewDetais = ViewDetails(inctructionTest: state.instructionText, buttonTitle: state.buttonTitle, buttonEnabled: state.buttonEnabled)
+        self.delegate?.handleViewUpdate(with: viewDetais)
+    }
+    
+    private func isDevicePositionStable(with angle: Double) -> Bool {
         self.angleUpdates.append(angle)
         let lastUpdates = self.angleUpdates.suffix(MotionSettings.stablePositionUpdatesCount)
         guard lastUpdates.count == MotionSettings.stablePositionUpdatesCount else {

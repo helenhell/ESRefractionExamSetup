@@ -34,4 +34,7 @@ class MockFaceDetector: NSObject, FaceDetectorProtocol {
         }
     }
     
+    func stopFaceDetection() {
+        //
+    }
 }

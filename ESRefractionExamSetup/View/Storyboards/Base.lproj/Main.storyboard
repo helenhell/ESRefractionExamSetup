@@ -19,17 +19,22 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKz-UR-hjk">
                                 <rect key="frame" x="20" y="159" width="353" height="151.66666666666663"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLc-m0-s0y">
-                                <rect key="frame" x="118" y="410.66666666666669" width="157" height="50"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="pLc-m0-s0y">
+                                <rect key="frame" x="98.333333333333329" y="410.66666666666669" width="196.33333333333337" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="i5P-Dp-lGT"/>
+                                    <constraint firstAttribute="height" constant="60" id="i5P-Dp-lGT"/>
                                 </constraints>
+                                <size key="titleShadowOffset" width="5" height="5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button" cornerStyle="capsule" titleAlignment="center">
+                                    <fontDescription key="titleFontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="20"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseBackgroundColor" red="0.1256814212501407" green="0.17035446258581555" blue="0.45001176251750702" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="setupButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aFb-ph-U9b"/>
                                 </connections>
@@ -40,7 +45,7 @@
                         <constraints>
                             <constraint firstItem="zKz-UR-hjk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9YG-nM-8MA"/>
                             <constraint firstItem="pLc-m0-s0y" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="AOA-YZ-FGD"/>
-                            <constraint firstItem="pLc-m0-s0y" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.4" id="JDU-h3-EPK"/>
+                            <constraint firstItem="pLc-m0-s0y" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.5" id="JDU-h3-EPK"/>
                             <constraint firstItem="zKz-UR-hjk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="YUg-ES-xME"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zKz-UR-hjk" secondAttribute="trailing" constant="20" id="bTo-1z-5jC"/>
                             <constraint firstItem="pLc-m0-s0y" firstAttribute="top" secondItem="zKz-UR-hjk" secondAttribute="bottom" constant="100" id="oD2-dt-He8"/>

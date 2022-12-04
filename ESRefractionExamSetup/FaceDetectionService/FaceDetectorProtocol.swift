@@ -15,4 +15,5 @@ protocol FaceDetectorProtocol: NSObject {
     var captureSession: AVCaptureSession! { get }
     var resultPublisher: FaceDetectionSubject! { get }
     func performFaceDetection()
+    func stopFaceDetection()
 }

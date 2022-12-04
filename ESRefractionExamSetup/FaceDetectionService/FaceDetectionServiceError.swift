@@ -7,9 +7,13 @@
 
 import Foundation
 
-enum FaceDetectionServiceError: Error {
+enum FaceDetectionServiceError: SetupError {
     
     case noCameraFound
     case detectionRequestFailed
     case capturingOutputFailed
+    
+    var message: String {
+        return "Face Detection Service Error"
+    }
 }

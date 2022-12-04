@@ -12,7 +12,6 @@
 		514FC1C92935F06F00118912 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1C82935F06F00118912 /* ViewController.swift */; };
 		514FC1CC2935F06F00118912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CA2935F06F00118912 /* Main.storyboard */; };
 		514FC1CE2935F07100118912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CD2935F07100118912 /* Assets.xcassets */; };
-		514FC1D12935F07100118912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514FC1CF2935F07100118912 /* LaunchScreen.storyboard */; };
 		514FC1EC29360AAB00118912 /* ESRefractionExamSetupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1EB29360AAB00118912 /* ESRefractionExamSetupUITests.swift */; };
 		514FC1EE29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1ED29360AAB00118912 /* ESRefractionExamSetupUITestsLaunchTests.swift */; };
 		514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F4293733FF00118912 /* MotionServiceTests.swift */; };
@@ -37,6 +36,9 @@
 		51BC87A8293CB40B00A932D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51BC87AA293CB40B00A932D8 /* Localizable.strings */; };
 		51BC87AD293CB46000A932D8 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87AC293CB46000A932D8 /* LocalizableStrings.swift */; };
 		51BC87CC293CBBA900A932D8 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87CB293CBBA900A932D8 /* ViewModelState.swift */; };
+		51BC87D0293CCFD800A932D8 /* ViewDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87CF293CCFD800A932D8 /* ViewDetails.swift */; };
+		51BC87DA293D26E800A932D8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87D9293D26E800A932D8 /* AlertService.swift */; };
+		51BC87DC293D27C400A932D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +65,6 @@
 		514FC1C82935F06F00118912 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		514FC1CB2935F06F00118912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		514FC1CD2935F07100118912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		514FC1D02935F07100118912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		514FC1D22935F07100118912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		514FC1DC29360A9F00118912 /* ESRefractionExamSetupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESRefractionExamSetupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		514FC1E929360AAB00118912 /* ESRefractionExamSetupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESRefractionExamSetupUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +93,9 @@
 		51BC87AB293CB43800A932D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		51BC87AC293CB46000A932D8 /* LocalizableStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		51BC87CB293CBBA900A932D8 /* ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelState.swift; sourceTree = "<group>"; };
+		51BC87CF293CCFD800A932D8 /* ViewDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDetails.swift; sourceTree = "<group>"; };
+		51BC87D9293D26E800A932D8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,17 +146,16 @@
 		514FC1C32935F06F00118912 /* ESRefractionExamSetup */ = {
 			isa = PBXGroup;
 			children = (
+				514FC1C42935F06F00118912 /* AppDelegate.swift */,
+				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
+				51BC87D1293D187400A932D8 /* View */,
 				51BC879F293BC3A700A932D8 /* ViewModel */,
 				51BC87932938F94100A932D8 /* FaceDetectionService */,
 				51BC87922938F92400A932D8 /* MotionService */,
 				51BC87AE293CB47800A932D8 /* Localization */,
-				514FC1C42935F06F00118912 /* AppDelegate.swift */,
-				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
-				514FC1C82935F06F00118912 /* ViewController.swift */,
-				514FC1CA2935F06F00118912 /* Main.storyboard */,
-				514FC1CD2935F07100118912 /* Assets.xcassets */,
-				514FC1CF2935F07100118912 /* LaunchScreen.storyboard */,
 				514FC1D22935F07100118912 /* Info.plist */,
+				514FC1CD2935F07100118912 /* Assets.xcassets */,
+				51BC87D9293D26E800A932D8 /* AlertService.swift */,
 			);
 			path = ESRefractionExamSetup;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				51BC87A0293BC5CF00A932D8 /* ViewModelDelegateProtocol.swift */,
+				51BC87CF293CCFD800A932D8 /* ViewDetails.swift */,
 				514FC2052938936300118912 /* ViewModel.swift */,
 				51BC87CB293CBBA900A932D8 /* ViewModelState.swift */,
 			);
@@ -245,6 +249,32 @@
 				51BC87AA293CB40B00A932D8 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		51BC87D1293D187400A932D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				51BC87D3293D188700A932D8 /* ViewControllers */,
+				51BC87D2293D187C00A932D8 /* Storyboards */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		51BC87D2293D187C00A932D8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1CA2935F06F00118912 /* Main.storyboard */,
+				51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		51BC87D3293D188700A932D8 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				514FC1C82935F06F00118912 /* ViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,8 +382,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				514FC1D12935F07100118912 /* LaunchScreen.storyboard in Resources */,
 				51BC87A8293CB40B00A932D8 /* Localizable.strings in Resources */,
+				51BC87DC293D27C400A932D8 /* LaunchScreen.storyboard in Resources */,
 				514FC1CE2935F07100118912 /* Assets.xcassets in Resources */,
 				514FC1CC2935F06F00118912 /* Main.storyboard in Resources */,
 			);
@@ -391,6 +421,8 @@
 				51BC878F2938F86300A932D8 /* FaceDetectionService.swift in Sources */,
 				51BC879D293BABCE00A932D8 /* FaceDetectionResult.swift in Sources */,
 				514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */,
+				51BC87D0293CCFD800A932D8 /* ViewDetails.swift in Sources */,
+				51BC87DA293D26E800A932D8 /* AlertService.swift in Sources */,
 				514FC1C52935F06F00118912 /* AppDelegate.swift in Sources */,
 				514FC1C72935F06F00118912 /* SceneDelegate.swift in Sources */,
 				514FC2062938936300118912 /* ViewModel.swift in Sources */,
@@ -445,14 +477,6 @@
 				514FC1CB2935F06F00118912 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		514FC1CF2935F07100118912 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				514FC1D02935F07100118912 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		51BC87AA293CB40B00A932D8 /* Localizable.strings */ = {
@@ -593,8 +617,9 @@
 				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ESRefractionExamSetup/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To perform the exam the app needs camera access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -626,8 +651,9 @@
 				DEVELOPMENT_TEAM = SQ4VJ58ARJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ESRefractionExamSetup/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "To perform the exam the app needs camera access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

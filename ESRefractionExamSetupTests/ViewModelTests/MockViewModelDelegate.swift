@@ -11,31 +11,17 @@ import XCTest
 
 class MockViewModelDelegate: ViewModelDelegateProtocol {
     
-    var positionExpectation: XCTestExpectation?
-    var faceDetectionExpectation: XCTestExpectation?
+    var expectation: XCTestExpectation?
     var completionCounter = 0
     var failureCounter = 0
-    var motionUpdatesCounter = 0
     
-    func didCompleteDevicePositionSetup() {
-        if motionUpdatesCounter == MotionSettings.stablePositionUpdatesCount {
-            completionCounter += 1
-            positionExpectation?.fulfill()
-        }
-    }
-    
-    func didFinishDevicePositionSetup(with error: ESRefractionExamSetup.MotionServiceError) {
+    func displayErrorALert(with message: String) {
         failureCounter += 1
-        positionExpectation?.fulfill()
+        expectation?.fulfill()
     }
     
-    func didCompleteFaceDetection() {
+    func handleViewUpdate(with viewDetails: ESRefractionExamSetup.ViewDetails) {
         completionCounter += 1
-        faceDetectionExpectation?.fulfill()
-    }
-    
-    func didFinishFaceDetection(with error: FaceDetectionServiceError) {
-        failureCounter += 1
-        faceDetectionExpectation?.fulfill()
+        expectation?.fulfill()
     }
 }

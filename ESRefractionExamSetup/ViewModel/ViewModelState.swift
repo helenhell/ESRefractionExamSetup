@@ -41,7 +41,6 @@ enum ViewModelState {
         case .errorOccured:
             next = .setupStart
         }
-        print("NEXT STATE = \(String(describing: next))")
         return next
     }
     

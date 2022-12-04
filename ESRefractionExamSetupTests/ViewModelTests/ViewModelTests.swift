@@ -33,16 +33,16 @@ final class ViewModelTests: XCTestCase {
         sut = nil
     }
 
-    func testViewModel_WhenDevicePositionSetupFinishesWithErorr_CallsCorrespondingMethodOnViewModelDelegate() {
+    func testViewModel_WhenSetupInterruptedWithErorr_CallsCorrespondingMethodOnViewModelDelegate() {
         
         //Arrange
         let expectation = expectation(description: "Expecting didFinishDevicePositionSetup(with error:_) to be called")
-        viewDelegate.positionExpectation = expectation
+        viewDelegate.expectation = expectation
         motionManager.error = MotionServiceError.deviceMotionIsUnavailable
         
         //Act
         sut = ViewModel(motionService: motionService, viewDelegate: viewDelegate)
-        sut.getDevicePosition()
+        //sut.getDevicePosition()
         
         //Assert
         wait(for: [expectation], timeout: 1)
@@ -54,12 +54,11 @@ final class ViewModelTests: XCTestCase {
         
         //Arrange
         let expectation = expectation(description: "Expecting didCompleteDevicePositionSetup() method to be called")
-        viewDelegate.positionExpectation = expectation
-        viewDelegate.motionUpdatesCounter = 3
+        viewDelegate.expectation = expectation
         
         //Act
         sut = ViewModel(motionService: motionService, viewDelegate: viewDelegate)
-        sut.getDevicePosition()
+        //sut.getDevicePosition()
         
         //Assert
         wait(for: [expectation], timeout: 1)
@@ -72,14 +71,14 @@ final class ViewModelTests: XCTestCase {
         
         //Arrange
         let expectation = expectation(description: "Expecting didCompleteFaceDetection() to be called")
-        viewDelegate.faceDetectionExpectation = expectation
+        viewDelegate.expectation = expectation
         let faceDetector = MockFaceDetector()
         faceDetector.result = .detectedFaces(number: 2)
         faceDetectionService = FaceDetectionService(faceDetector: faceDetector)
         sut = ViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
         
         //Act
-        sut.detectFace()
+        //sut.detectFace()
         
         //Assert
         wait(for: [expectation], timeout: 1)
@@ -92,14 +91,14 @@ final class ViewModelTests: XCTestCase {
         
         //Arrange
         let expectation = expectation(description: "Expecting didFinishFaceDetection(with error:_) to be called")
-        viewDelegate.faceDetectionExpectation = expectation
+        viewDelegate.expectation = expectation
         let faceDetector = MockFaceDetector()
         faceDetector.error = .detectionRequestFailed
         faceDetectionService = FaceDetectionService(faceDetector: faceDetector)
         sut = ViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
         
         //Act
-        sut.detectFace()
+        //sut.detectFace()
         
         //Assert
         wait(for: [expectation], timeout: 1)

@@ -11,9 +11,9 @@ import Combine
 class FaceDetectionService {
     
     var detectionPublisher: FaceDetectionSubject!
-    var faceDetector: FaceDetectorProtocol!
+    private(set) var faceDetector: FaceDetectorProtocol!
     
-    var subscriptions: Set<AnyCancellable> = []
+    private var subscriptions: Set<AnyCancellable> = []
     
     init(detectionPublisher: FaceDetectionSubject = FaceDetectionSubject(), faceDetector: FaceDetectorProtocol!) {
         self.detectionPublisher = detectionPublisher
@@ -28,23 +28,23 @@ class FaceDetectionService {
     }
     
     func detectFace() {
-        
-       self.faceDetector.resultPublisher.sink { completion in
+        self.faceDetector.resultPublisher.sink { completion in
             switch completion {
             case .failure(let error):
                 self.detectionPublisher.send(completion: .failure(error))
             case .finished:
                 self.detectionPublisher.send(completion: .finished)
             }
-            
         } receiveValue: { result in
-            
             self.detectionPublisher.send(result)
-            self.detectionPublisher.send(completion: .finished)
         }
         .store(in: &subscriptions)
 
         self.faceDetector.performFaceDetection()
+    }
+    
+    func stopFaceDetection() {
+        self.faceDetector.stopFaceDetection()
     }
     
 }
