@@ -13,5 +13,6 @@ protocol ViewModelDelegateProtocol {
     func didFinishDevicePositionSetup(with error: MotionServiceError)
     func didCompleteFaceDetection()
     func didFinishFaceDetection(with error: FaceDetectionServiceError)
+    func handleViewUpdate(labelText: String, buttonTitle: String, buttonEnabled: Bool)
     
 }

@@ -17,13 +17,15 @@ class ViewModel {
     var delegate: ViewModelDelegateProtocol?
     var state: ViewModelState = .setupStart {
         didSet {
-            self.updateView()
+            self.updateView(for: self.state)
         }
     }
     var angleUpdates: [Double] = []
     
     init(motionService: MotionServiceBase! = MotionService(), faceDetectionService: FaceDetectionService! = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
+        
         self.delegate = viewDelegate
+        self.updateView(for: self.state)
         self.motionService = motionService
         self.motionService.positionPublisher
             .receive(on: DispatchQueue.main)
@@ -39,9 +41,9 @@ class ViewModel {
                     self.state = self.state.next
                     self.motionService.stopMotionUpdates()
                     self.angleUpdates = []
-                    if self.state == .devicePositionedDetectingFace {
-                        self.detectFace()
-                    }
+//                    if self.state == .devicePositioned {
+//                        self.detectFace()
+//                    }
                     self.delegate?.didCompleteDevicePositionSetup()
                 }
             }
@@ -78,8 +80,17 @@ class ViewModel {
         self.faceDetectionService.detectFace()
     }
     
-    func updateView() {
-        
+    func updateView(for state: ViewModelState) {
+        print("STATE = \(self.state), ISTRUCTION = \(state.instructionText), BUTTON = \(state.buttonTitle), BUTTON ENABLED = \(state.buttonEnabled)")
+        self.delegate?.handleViewUpdate(labelText: state.instructionText, buttonTitle: state.buttonTitle, buttonEnabled: state.buttonEnabled)
+    }
+    
+    func handleButtonTap() {
+        if self.state == .setupStart {
+            self.getDevicePosition()
+        } else if self.state == .devicePositioned {
+            self.detectFace()
+        }
     }
     
     func isDevicePositionStable(with angle: Double) -> Bool {
@@ -101,37 +112,4 @@ class ViewModel {
 }
 
 
-enum ViewModelState {
-    
-    case setupStart
-    case positioningDevice
-    case devicePositionedDetectingFace
-    case faceDetectedCheckingPosition
-    case devicePositionedFaceDetected
-    case setupComplete
-    case errorOccured
-    
-    var next: ViewModelState {
-        var next: ViewModelState!
-        switch self {
-        case .setupStart:
-            next = .positioningDevice
-        case .positioningDevice:
-            next = .devicePositionedDetectingFace
-        case .devicePositionedDetectingFace:
-            next = .faceDetectedCheckingPosition
-        case .faceDetectedCheckingPosition:
-            next = .devicePositionedFaceDetected
-        case .devicePositionedFaceDetected:
-            next = .setupComplete
-        case .setupComplete:
-            next = .setupComplete
-        case .errorOccured:
-            next = .setupStart
-        }
-        print("NEXT STATE = \(String(describing: next))")
-        return next
-    }
-    
-    
-}
+
