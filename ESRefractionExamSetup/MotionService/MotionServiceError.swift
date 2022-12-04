@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum MotionServiceError: Error {
+protocol SetupError: Error {
+    
+}
+
+enum MotionServiceError: SetupError {
+    
     
     case deviceMotionIsUnavailable
     case incorrectUpdateInterval

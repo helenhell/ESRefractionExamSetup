@@ -154,7 +154,7 @@ extension ViewController: ViewModelDelegateProtocol {
     
     func didCompleteDevicePositionSetup() {
         print("DEVICE SET UP")
-        if self.viewModel.state == .devicePositioned {
+        if self.viewModel.state == .devicePositionedDetectingFace {
             self.viewModel.detectFace()
         }
     }

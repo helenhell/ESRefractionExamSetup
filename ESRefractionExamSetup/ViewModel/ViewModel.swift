@@ -15,7 +15,11 @@ class ViewModel {
     var subscriptions: Set<AnyCancellable> = []
     
     var delegate: ViewModelDelegateProtocol?
-    var state: ViewModelState = .setupStart
+    var state: ViewModelState = .setupStart {
+        didSet {
+            self.updateView()
+        }
+    }
     
     init(motionService: MotionServiceBase! = MotionService(), faceDetectionService: FaceDetectionService! = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
         self.delegate = viewDelegate
@@ -28,8 +32,9 @@ class ViewModel {
                 }
             } receiveValue: { value in
                 print(value)
+                // TODO: check range
                 self.delegate?.didCompleteDevicePositionSetup()
-                self.state = .devicePositioned
+                self.state = self.state.next
             }
             .store(in: &subscriptions)
         
@@ -42,7 +47,7 @@ class ViewModel {
             } receiveValue: { result in
                 print(result)
                 self.delegate?.didCompleteFaceDetection()
-                self.state = .faceDetected
+                self.state = self.state.next
             }
             .store(in: &subscriptions)
 
@@ -62,13 +67,41 @@ class ViewModel {
         self.faceDetectionService.detectFace()
     }
     
+    func updateView() {
+        
+    }
+    
 }
 
 
 enum ViewModelState {
     
-    
     case setupStart
-    case devicePositioned
-    case faceDetected
+    case positioningDevice
+    case devicePositionedDetectingFace
+    case faceDetectedCheckingPosition
+    case devicePositionedFaceDetected
+    case setupComplete
+    case errorOccured
+    
+    var next: ViewModelState {
+        switch self {
+        case .setupStart:
+            return .positioningDevice
+        case .positioningDevice:
+            return .devicePositionedDetectingFace
+        case .devicePositionedDetectingFace:
+            return .faceDetectedCheckingPosition
+        case .faceDetectedCheckingPosition:
+            return .devicePositionedFaceDetected
+        case .devicePositionedFaceDetected:
+            return .setupComplete
+        case .setupComplete:
+            return .setupComplete
+        case .errorOccured:
+            return .setupStart
+        }
+    }
+    
+    
 }
