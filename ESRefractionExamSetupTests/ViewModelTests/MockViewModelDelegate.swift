@@ -15,10 +15,13 @@ class MockViewModelDelegate: ViewModelDelegateProtocol {
     var faceDetectionExpectation: XCTestExpectation?
     var completionCounter = 0
     var failureCounter = 0
+    var motionUpdatesCounter = 0
     
     func didCompleteDevicePositionSetup() {
-        completionCounter += 1
-        positionExpectation?.fulfill()
+        if motionUpdatesCounter == MotionSettings.stablePositionUpdatesCount {
+            completionCounter += 1
+            positionExpectation?.fulfill()
+        }
     }
     
     func didFinishDevicePositionSetup(with error: ESRefractionExamSetup.MotionServiceError) {

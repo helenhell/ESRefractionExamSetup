@@ -10,5 +10,6 @@ import Foundation
 struct MotionSettings {
     
     static let motionUpdateInterval: Double = 1
+    static let stablePositionUpdatesCount: Int = 3
     static let requiredAngleRange: ClosedRange<Double> = (70...90)
 }

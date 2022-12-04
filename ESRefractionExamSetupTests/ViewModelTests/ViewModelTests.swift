@@ -50,11 +50,12 @@ final class ViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.completionCounter, 0, "didCompleteDevicePositionSetup() method should not be called")
     }
     
-    func testViewModel_WhenDevicePositionSetupCompletesWithSuccess_CallsCorrespondingMethodOnViewModelDelegate() {
+    func testViewModel_WhenDevicePositionedFor3Seconds_CallsCorrespondingMethodOnViewModelDelegate() {
         
         //Arrange
-        let expectation = expectation(description: "Expecting didFinishDevicePositionSetup(with error:_) to be called")
+        let expectation = expectation(description: "Expecting didCompleteDevicePositionSetup() method to be called")
         viewDelegate.positionExpectation = expectation
+        viewDelegate.motionUpdatesCounter = 3
         
         //Act
         sut = ViewModel(motionService: motionService, viewDelegate: viewDelegate)
@@ -106,4 +107,6 @@ final class ViewModelTests: XCTestCase {
         XCTAssertEqual(viewDelegate.completionCounter, 0, "didCompleteDevicePositionSetup() method should not be called")
         
     }
+    
+    
 }

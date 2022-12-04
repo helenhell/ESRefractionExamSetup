@@ -53,18 +53,7 @@ class MotionServiceBase: MotionServiceProtocol {
             return
         }
         
-        let queue = OperationQueue()
-        self.motionManager.startDeviceMotionUpdates(to: queue) { [weak self] motion, error in
-            
-            guard let _self = self, error == nil, let attitude = motion?.attitude else {
-                self?.positionPublisher.send(completion: .failure(.motionUpdateFailed))
-                return
-            }
-            
-            let degrees = _self.convertToDegrees(pitch: attitude.pitch)
-            _self.positionPublisher.send(degrees)
-            print("**********POSITION = \(degrees)")
-        }
+        self.startMotionUpdates()
     }
     
     func isMotionUpdateIntervalSet() -> (Bool, T?) {
@@ -76,6 +65,25 @@ class MotionServiceBase: MotionServiceProtocol {
     
     func convertToDegrees(pitch: Double) -> Double {
         return pitch * 180.0/Double.pi
+    }
+    
+    func stopMotionUpdates() {
+        self.motionManager.stopDeviceMotionUpdates()
+    }
+    
+    func startMotionUpdates() {
+        let queue = OperationQueue()
+        self.motionManager.startDeviceMotionUpdates(to: queue) { [weak self] motion, error in
+            
+            guard let _self = self, error == nil, let attitude = motion?.attitude else {
+                self?.positionPublisher.send(completion: .failure(.motionUpdateFailed))
+                return
+            }
+            
+            let degrees = _self.convertToDegrees(pitch: attitude.pitch)
+            _self.positionPublisher.send(degrees)
+            //print("**********POSITION SENT = \(degrees)")
+        }
     }
 }
 

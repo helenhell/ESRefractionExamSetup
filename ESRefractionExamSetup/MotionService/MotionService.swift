@@ -25,4 +25,5 @@ class MotionService: MotionServiceBase {
         self.isDeviceMotionAvailable = self.motionManager.isDeviceMotionAvailable
     }
     
+    
 }

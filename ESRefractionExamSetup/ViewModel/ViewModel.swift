@@ -20,21 +20,30 @@ class ViewModel {
             self.updateView()
         }
     }
+    var angleUpdates: [Double] = []
     
     init(motionService: MotionServiceBase! = MotionService(), faceDetectionService: FaceDetectionService! = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
         self.delegate = viewDelegate
         self.motionService = motionService
         self.motionService.positionPublisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
                 if case .failure(let error) = completion {
                     self.delegate?.didFinishDevicePositionSetup(with: error)
                 }
             } receiveValue: { value in
-                print(value)
+                print("**********POSITION RECEIVED = \(value)")
                 // TODO: check range
-                self.delegate?.didCompleteDevicePositionSetup()
-                self.state = self.state.next
+                if self.isDevicePositionStable(with: value) {
+                    self.state = self.state.next
+                    self.motionService.stopMotionUpdates()
+                    self.angleUpdates = []
+                    if self.state == .devicePositionedDetectingFace {
+                        self.detectFace()
+                    }
+                    self.delegate?.didCompleteDevicePositionSetup()
+                }
             }
             .store(in: &subscriptions)
         
@@ -46,6 +55,7 @@ class ViewModel {
                 }
             } receiveValue: { result in
                 print(result)
+                self.motionService.startMotionUpdates()
                 self.delegate?.didCompleteFaceDetection()
                 self.state = self.state.next
             }
@@ -60,6 +70,7 @@ class ViewModel {
     }
     
     func getDevicePosition() {
+        self.state = self.state.next
         self.motionService.getDevicePosition()
     }
     
@@ -69,6 +80,22 @@ class ViewModel {
     
     func updateView() {
         
+    }
+    
+    func isDevicePositionStable(with angle: Double) -> Bool {
+        
+        self.angleUpdates.append(angle)
+        let lastUpdates = self.angleUpdates.suffix(MotionSettings.stablePositionUpdatesCount)
+        guard lastUpdates.count == MotionSettings.stablePositionUpdatesCount else {
+            return false
+        }
+        var stablePositionCounter = 0
+        lastUpdates.forEach {
+            if MotionSettings.requiredAngleRange.contains($0) {
+                stablePositionCounter += 1
+            }
+        }
+        return stablePositionCounter == MotionSettings.stablePositionUpdatesCount
     }
     
 }
@@ -85,22 +112,25 @@ enum ViewModelState {
     case errorOccured
     
     var next: ViewModelState {
+        var next: ViewModelState!
         switch self {
         case .setupStart:
-            return .positioningDevice
+            next = .positioningDevice
         case .positioningDevice:
-            return .devicePositionedDetectingFace
+            next = .devicePositionedDetectingFace
         case .devicePositionedDetectingFace:
-            return .faceDetectedCheckingPosition
+            next = .faceDetectedCheckingPosition
         case .faceDetectedCheckingPosition:
-            return .devicePositionedFaceDetected
+            next = .devicePositionedFaceDetected
         case .devicePositionedFaceDetected:
-            return .setupComplete
+            next = .setupComplete
         case .setupComplete:
-            return .setupComplete
+            next = .setupComplete
         case .errorOccured:
-            return .setupStart
+            next = .setupStart
         }
+        print("NEXT STATE = \(String(describing: next))")
+        return next
     }
     
     
