@@ -59,10 +59,9 @@ extension MotionServiceProtocol {
                 self.resultPublisher.send(completion: .failure(.motionUpdateFailed))
                 return
             }
-            
             let degrees = self.convertToDegrees(pitch: attitude.pitch)
             self.resultPublisher.send(degrees)
-            print("**********POSITION SENT = \(degrees)")
+            
         }
     }
 }

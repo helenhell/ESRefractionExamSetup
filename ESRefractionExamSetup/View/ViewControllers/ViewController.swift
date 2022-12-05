@@ -67,6 +67,10 @@ extension ViewController: ViewModelDelegateProtocol {
     
     func displayCameraView(with layer: AVCaptureVideoPreviewLayer) {
         DispatchQueue.main.async {
+            
+            if let _ = self.previewContainer.layer.sublayers?.last as? AVCaptureVideoPreviewLayer {
+                return
+            }
             layer.frame = self.previewContainer.bounds
             self.previewContainer.layer.addSublayer(layer)
         }

@@ -12,7 +12,7 @@ struct AlertService {
     
     static func create(with message: String) -> UIAlertController {
         
-        let alert = UIAlertController(title: "Error occured", message: "Some error message", preferredStyle: .alert)
+        let alert = UIAlertController(title: SetupStrings.ALERT_TITLE.localized, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         return alert
     }

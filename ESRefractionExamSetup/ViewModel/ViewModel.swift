@@ -34,7 +34,6 @@ class ViewModel {
         self.motionService.resultPublisher
             .receive(on: DispatchQueue.main)
             .sink { completion in
-                print(completion)
                 if case .failure(let error) = completion {
                     self.handleError(error)
                 }
@@ -55,7 +54,6 @@ class ViewModel {
                     self.handleError(error)
                 }
             } receiveValue: { result in
-                print(result)
                 switch result {
                 case .detectedFaces(number: _):
                     // TODO: Handle use case when more than one case detected
@@ -89,7 +87,7 @@ class ViewModel {
             self.state = self.state.next
             self.getDevicePosition()
         } else if self.state == .devicePositionedFaceDetected || self.state == .setupComplete {
-            self.state = .setupStart
+            self.state = .setupComplete
         }
     }
     

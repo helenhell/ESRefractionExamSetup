@@ -151,12 +151,12 @@
 				514FC1C42935F06F00118912 /* AppDelegate.swift */,
 				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
 				51BC87E1293DE0C100A932D8 /* Model */,
+				51BC87D9293D26E800A932D8 /* AlertService.swift */,
 				51BC87D1293D187400A932D8 /* View */,
 				51BC879F293BC3A700A932D8 /* ViewModel */,
 				51BC87AE293CB47800A932D8 /* Localization */,
 				514FC1D22935F07100118912 /* Info.plist */,
 				514FC1CD2935F07100118912 /* Assets.xcassets */,
-				51BC87D9293D26E800A932D8 /* AlertService.swift */,
 			);
 			path = ESRefractionExamSetup;
 			sourceTree = "<group>";
