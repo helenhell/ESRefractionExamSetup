@@ -15,6 +15,7 @@ enum ViewModelState {
     case detectingFace
     case faceDetected
     case checkingPosition
+    case repositioningDevice
     case devicePositionedFaceDetected
     case setupComplete
     case errorOccured
@@ -33,6 +34,8 @@ enum ViewModelState {
         case .faceDetected:
             next = .checkingPosition
         case .checkingPosition:
+            next = .repositioningDevice
+        case .repositioningDevice:
             next = .devicePositionedFaceDetected
         case .devicePositionedFaceDetected:
             next = .setupComplete
@@ -43,6 +46,7 @@ enum ViewModelState {
         }
         return next
     }
+    
     
     var instructionText: String {
         switch self {
@@ -58,6 +62,8 @@ enum ViewModelState {
             return SetupStrings.FACE_DETECTED_INSTRUCTION.localized
         case .checkingPosition:
             return SetupStrings.FACE_DETECTED_INSTRUCTION.localized
+        case .repositioningDevice:
+            return SetupStrings.POSITIONING_INSTRUCTION.localized
         case .devicePositionedFaceDetected:
             return SetupStrings.SETUP_COMPLETE_INSTRUCTION.localized
         case .setupComplete:
@@ -80,6 +86,8 @@ enum ViewModelState {
         case .faceDetected:
             return SetupStrings.FACE_DETECTED_BUTTON_TITLE.localized
         case .checkingPosition:
+            return SetupStrings.CHECKING_POSITION_BUTTON_TITLE.localized
+        case .repositioningDevice:
             return SetupStrings.CHECKING_POSITION_BUTTON_TITLE.localized
         case .devicePositionedFaceDetected:
             return SetupStrings.SETUP_COMPLETE_BUTTON_TITLE.localized
@@ -104,11 +112,22 @@ enum ViewModelState {
             return true
         case .checkingPosition:
             return false
+        case.repositioningDevice:
+            return false
         case .devicePositionedFaceDetected:
             return true
         case .setupComplete:
             return true
         case .errorOccured:
+            return true
+        }
+    }
+    
+    var previewContainerHidden: Bool {
+        switch self {
+        case .devicePositioned, .detectingFace, .faceDetected, .checkingPosition:
+            return false
+        default:
             return true
         }
     }

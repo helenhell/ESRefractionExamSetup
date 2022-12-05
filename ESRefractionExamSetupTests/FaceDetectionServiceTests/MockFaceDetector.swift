@@ -23,6 +23,10 @@ class MockFaceDetector: NSObject, FaceDetectorProtocol {
         self.resultPublisher = resultPublisher
     }
     
+    func cameraFeedPreviewLayer() -> AVCaptureVideoPreviewLayer {
+        return AVCaptureVideoPreviewLayer(session: self.captureSession)
+    }
+    
     func performFaceDetection() {
        
         if let error = self.error {

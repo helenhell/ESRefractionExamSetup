@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import AVFoundation
 
 protocol ViewModelDelegateProtocol {
     
     func displayErrorALert(with message: String)
     func handleViewUpdate(with viewDetails: ViewDetails)
+    func displayCameraView(with layer: AVCaptureVideoPreviewLayer)
     
 }

@@ -50,6 +50,6 @@ class MockMotion: CMDeviceMotion {
 class MockAttitude: CMAttitude {
     
     override var pitch: Double {
-        return 0.0
+        return Double.random(in: MotionSettings.requiredAngleRange)
     }
 }

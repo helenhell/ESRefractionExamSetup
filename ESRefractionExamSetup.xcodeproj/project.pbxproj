@@ -17,7 +17,6 @@
 		514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F4293733FF00118912 /* MotionServiceTests.swift */; };
 		514FC1F72937380700118912 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F62937380700118912 /* MotionService.swift */; };
 		514FC1F9293738BD00118912 /* MotionServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1F8293738BD00118912 /* MotionServiceError.swift */; };
-		514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FA29374E4E00118912 /* MockMotionService.swift */; };
 		514FC1FD29374E7200118912 /* MotionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */; };
 		514FC1FF2937667400118912 /* MotionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC1FE2937667400118912 /* MotionSettings.swift */; };
 		514FC2012937D94800118912 /* MockMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514FC2002937D94800118912 /* MockMotionManager.swift */; };
@@ -40,6 +39,7 @@
 		51BC87DA293D26E800A932D8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87D9293D26E800A932D8 /* AlertService.swift */; };
 		51BC87DC293D27C400A932D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */; };
 		51BC87DE293DD56400A932D8 /* SetupServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87DD293DD56400A932D8 /* SetupServiceProtocol.swift */; };
+		51BC87E3293DF56800A932D8 /* MockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87E2293DF56800A932D8 /* MockViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,6 @@
 		514FC1F4293733FF00118912 /* MotionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceTests.swift; sourceTree = "<group>"; };
 		514FC1F62937380700118912 /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
 		514FC1F8293738BD00118912 /* MotionServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceError.swift; sourceTree = "<group>"; };
-		514FC1FA29374E4E00118912 /* MockMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionService.swift; sourceTree = "<group>"; };
 		514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionServiceProtocol.swift; sourceTree = "<group>"; };
 		514FC1FE2937667400118912 /* MotionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionSettings.swift; sourceTree = "<group>"; };
 		514FC2002937D94800118912 /* MockMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMotionManager.swift; sourceTree = "<group>"; };
@@ -98,6 +97,7 @@
 		51BC87D9293D26E800A932D8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51BC87DD293DD56400A932D8 /* SetupServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServiceProtocol.swift; sourceTree = "<group>"; };
+		51BC87E2293DF56800A932D8 /* MockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +183,6 @@
 		514FC202293889C400118912 /* MotionServiceTests */ = {
 			isa = PBXGroup;
 			children = (
-				514FC1FA29374E4E00118912 /* MockMotionService.swift */,
 				514FC2002937D94800118912 /* MockMotionManager.swift */,
 				514FC1F4293733FF00118912 /* MotionServiceTests.swift */,
 			);
@@ -227,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				51BC87A2293BC6D800A932D8 /* MockViewModelDelegate.swift */,
+				51BC87E2293DF56800A932D8 /* MockViewModel.swift */,
 				514FC203293889F600118912 /* ViewModelTests.swift */,
 			);
 			path = ViewModelTests;
@@ -449,9 +449,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				514FC2012937D94800118912 /* MockMotionManager.swift in Sources */,
-				514FC1FB29374E4E00118912 /* MockMotionService.swift in Sources */,
 				514FC204293889F600118912 /* ViewModelTests.swift in Sources */,
 				51BC87A3293BC6D800A932D8 /* MockViewModelDelegate.swift in Sources */,
+				51BC87E3293DF56800A932D8 /* MockViewModel.swift in Sources */,
 				514FC1F5293733FF00118912 /* MotionServiceTests.swift in Sources */,
 				51BC87992939103100A932D8 /* MockFaceDetector.swift in Sources */,
 				51BC878D2938CE2800A932D8 /* FaceDetectionServiceTests.swift in Sources */,

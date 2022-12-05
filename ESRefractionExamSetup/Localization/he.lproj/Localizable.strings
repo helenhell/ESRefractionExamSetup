@@ -21,3 +21,13 @@ FACE_DETECTED_BUTTON_TITLE = "נא להמשיך";
 CHECKING_POSITION_BUTTON_TITLE = "המתנה...";
 SETUP_COMPLETE_INSTRUCTION = "ההכנה הסתיימה בהצלחה. נא להתחיל את הבדיקה.";
 SETUP_COMPLETE_BUTTON_TITLE = "התחלה";
+
+
+//ALERT MESSAGES
+ALERT_TITLE = "Setup Interrupted";
+DEVICE_MOTION_UNAVAILABLE = "Device motion service is unavailable";
+INCORRECT_UPDATE_INTERVAL = "Incorrect motion update interval was set";
+MOTION_UPDATE_FAILED = "Motion service update failed";
+NO_CAMERA_FOUND = "Device camera is unavailable";
+DETECTION_REQUEST_FAILED = "Face detection request failed";
+CAPTURING_OUTPUT_FAILED = "Capturing camera output failed";

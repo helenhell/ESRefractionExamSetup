@@ -11,18 +11,19 @@ import Combine
 class ViewModel {
     
     private var motionService: any MotionServiceProtocol
-    private var faceDetectionService: FaceDetectionService
+    var faceDetectionService: FaceDetectionService
     private var subscriptions: Set<AnyCancellable> = []
     
     private var delegate: ViewModelDelegateProtocol?
-    private var state: ViewModelState = .setupStart {
+    
+    var state: ViewModelState = .setupStart {
         didSet {
             self.updateView(for: self.state)
         }
     }
     private var angleUpdates: [Double] = []
     
-    init(motionService: any MotionServiceProtocol = MotionService(), faceDetectionService: FaceDetectionService = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
+    init(motionService: any MotionServiceProtocol = MotionService(), faceDetectionService: FaceDetectionService = FaceDetectionService(), viewDelegate: ViewModelDelegateProtocol) {
         
         self.delegate = viewDelegate
         self.motionService = motionService
@@ -39,15 +40,16 @@ class ViewModel {
                 }
             } receiveValue: { value in
                 if self.isDevicePositionStable(with: value) {
-                    self.state = self.state.next
+                    self.state = self.state == .checkingPosition ? .devicePositionedFaceDetected : self.state.next
                     self.motionService.stopPerforming()
                     self.angleUpdates = []
+                } else if self.state == .checkingPosition && !MotionSettings.requiredAngleRange.contains(value){
+                    self.state = .repositioningDevice
                 }
             }
             .store(in: &subscriptions)
         
         self.faceDetectionService.resultPublisher
-            .first(where: { $0 == .detectedFaces(number: 1) })
             .sink { completion in
                 if case .failure(let error) = completion {
                     self.handleError(error)
@@ -57,14 +59,13 @@ class ViewModel {
                 switch result {
                 case .detectedFaces(number: _):
                     // TODO: Handle use case when more than one case detected
-                    self.state = self.state.next
+                    self.state = self.state == .detectingFace ? self.state.next : self.state
                     self.faceDetectionService.stopPerforming()
                 case .noFaceDetected:
                     break
                 }
             }
             .store(in: &subscriptions)
-
     }
     
     deinit {
@@ -78,10 +79,14 @@ class ViewModel {
             return
         }
         if self.state == .setupStart {
+            self.state = self.state.next
             self.getDevicePosition()
         } else if self.state == .devicePositioned {
+            self.state = self.state.next
+            self.delegate?.displayCameraView(with: self.faceDetectionService.serviceProvider.cameraFeedPreviewLayer())
             self.detectFace()
         } else if self.state == .faceDetected {
+            self.state = self.state.next
             self.getDevicePosition()
         } else if self.state == .devicePositionedFaceDetected || self.state == .setupComplete {
             self.state = .setupStart
@@ -89,23 +94,21 @@ class ViewModel {
     }
     
     private func getDevicePosition() {
-        self.state = self.state.next
         self.motionService.performService()
     }
     
     private func detectFace() {
-        self.state = self.state.next
         self.faceDetectionService.performService()
+        
     }
     
     private func handleError(_ error: SetupError) {
         self.state = .errorOccured
-        self.updateView(for: self.state)
         self.delegate?.displayErrorALert(with: error.message)
     }
     
     private func updateView(for state: ViewModelState) {
-        let viewDetais = ViewDetails(inctructionTest: state.instructionText, buttonTitle: state.buttonTitle, buttonEnabled: state.buttonEnabled)
+        let viewDetais = ViewDetails(inctructionTest: state.instructionText, buttonTitle: state.buttonTitle, buttonEnabled: state.buttonEnabled, previewContainerIsHidden: state.previewContainerHidden)
         self.delegate?.handleViewUpdate(with: viewDetais)
     }
     

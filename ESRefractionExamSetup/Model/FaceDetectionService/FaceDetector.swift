@@ -13,6 +13,7 @@ import Combine
 class FaceDetector: NSObject, FaceDetectorProtocol {
     
     private(set) var captureSession:AVCaptureSession!
+    private lazy var previewLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     let resultPublisher: FaceDetectionSubject!
     
     init(captureSession: AVCaptureSession! = AVCaptureSession(), resultPublisher: FaceDetectionSubject! = FaceDetectionSubject()) {
@@ -52,9 +53,8 @@ class FaceDetector: NSObject, FaceDetectorProtocol {
     }
     
     private func cameraFeedPreviewLayer(for captureSession: AVCaptureSession) -> AVCaptureVideoPreviewLayer {
-        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.videoGravity = .resizeAspectFill
-        return previewLayer
+        self.previewLayer.videoGravity = .resizeAspectFill
+        return self.previewLayer
     }
     
     private func cameraOutput() -> AVCaptureVideoDataOutput {

@@ -21,9 +21,9 @@ class FaceDetectionService: SetupServiceProtocol {
     
     private var subscriptions: Set<AnyCancellable> = []
     
-    init(detectionPublisher: FaceDetectionSubject = FaceDetectionSubject(), faceDetector: FaceDetectorProtocol) {
-        self.resultPublisher = detectionPublisher
-        self.serviceProvider = faceDetector
+    init(resultPublisher: FaceDetectionSubject = FaceDetectionSubject(), serviceProvider: FaceDetectorProtocol = FaceDetector()) {
+        self.resultPublisher = resultPublisher
+        self.serviceProvider = serviceProvider
         
     }
     

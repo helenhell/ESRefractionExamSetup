@@ -13,4 +13,5 @@ struct ViewDetails {
     let inctructionTest: String
     let buttonTitle: String
     let buttonEnabled: Bool
+    let previewContainerIsHidden: Bool
 }

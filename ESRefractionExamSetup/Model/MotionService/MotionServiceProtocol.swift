@@ -62,7 +62,7 @@ extension MotionServiceProtocol {
             
             let degrees = self.convertToDegrees(pitch: attitude.pitch)
             self.resultPublisher.send(degrees)
-            //print("**********POSITION SENT = \(degrees)")
+            print("**********POSITION SENT = \(degrees)")
         }
     }
 }

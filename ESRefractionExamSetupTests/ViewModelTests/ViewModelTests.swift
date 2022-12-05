@@ -10,102 +10,33 @@ import XCTest
 
 final class ViewModelTests: XCTestCase {
     
-    var sut: ViewModel!
-    var motionService: MotionService!
+    var sut: MockViewModel!
     var motionManager: MockMotionManager!
-    var faceDetectionService: FaceDetectionService!
+    var faceDetector: MockFaceDetector!
     var viewDelegate: MockViewModelDelegate!
     
     
     override func setUpWithError() throws {
         viewDelegate = MockViewModelDelegate()
         motionManager = MockMotionManager()
-        motionService = MotionService(serviceProvider: motionManager)
-        
-        
+        faceDetector = MockFaceDetector()
+        let motionService = MotionService(serviceProvider: motionManager)
+        let faceDetectionService = FaceDetectionService(serviceProvider: faceDetector)
+        sut = MockViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
     }
 
     override func tearDownWithError() throws {
         viewDelegate = nil
         motionManager = nil
-        motionService = nil
-        faceDetectionService = nil
+        faceDetector = nil
         sut = nil
     }
 
-    func testViewModel_WhenSetupInterruptedWithErorr_CallsCorrespondingMethodOnViewModelDelegate() {
-        
-        //Arrange
-        let expectation = expectation(description: "Expecting didFinishDevicePositionSetup(with error:_) to be called")
-        viewDelegate.expectation = expectation
-        motionManager.error = MotionServiceError.deviceMotionIsUnavailable
-        
-        //Act
-        sut = ViewModel(motionService: motionService, viewDelegate: viewDelegate)
-        //sut.getDevicePosition()
-        
-        //Assert
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(viewDelegate.failureCounter, 1, "didFinishDevicePositionSetup(with error:_) method should be called once")
-        XCTAssertEqual(viewDelegate.completionCounter, 0, "didCompleteDevicePositionSetup() method should not be called")
-    }
+    //func testViewModel_WhenSetupInterruptedWithErorr_CallsErrorHandlerOnViewModelDelegate() {}
     
-    func testViewModel_WhenDevicePositionedFor3Seconds_CallsCorrespondingMethodOnViewModelDelegate() {
-        
-        //Arrange
-        let expectation = expectation(description: "Expecting didCompleteDevicePositionSetup() method to be called")
-        viewDelegate.expectation = expectation
-        
-        //Act
-        sut = ViewModel(motionService: motionService, viewDelegate: viewDelegate)
-        //sut.getDevicePosition()
-        
-        //Assert
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(viewDelegate.failureCounter, 0, "didFinishDevicePositionSetup(with error:_) method should not be called")
-        XCTAssertEqual(viewDelegate.completionCounter, 1, "didCompleteDevicePositionSetup() method should be called once")
-        
-    }
+    //func testViewModel_WhenServiceReceivedValue_CallsViewUpdateOnViewModelDelegate() {}
     
-    func testViewModel_WhenFaceDetectionCompletesWithSuccess_CallsCorrespondingMethodOnViewModelDelegate() {
-        
-        //Arrange
-        let expectation = expectation(description: "Expecting didCompleteFaceDetection() to be called")
-        viewDelegate.expectation = expectation
-        let faceDetector = MockFaceDetector()
-        faceDetector.result = .detectedFaces(number: 2)
-        faceDetectionService = FaceDetectionService(faceDetector: faceDetector)
-        sut = ViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
-        
-        //Act
-        //sut.detectFace()
-        
-        //Assert
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(viewDelegate.failureCounter, 0, "didFinishDevicePositionSetup(with error:_) method should not be called")
-        XCTAssertEqual(viewDelegate.completionCounter, 1, "didCompleteDevicePositionSetup() method should be called once")
-        
-    }
-    
-    func testViewModel_WhenFaceDetectionFinishesWithError_CallsCorrespondingMethodOnViewModelDelegate() {
-        
-        //Arrange
-        let expectation = expectation(description: "Expecting didFinishFaceDetection(with error:_) to be called")
-        viewDelegate.expectation = expectation
-        let faceDetector = MockFaceDetector()
-        faceDetector.error = .detectionRequestFailed
-        faceDetectionService = FaceDetectionService(faceDetector: faceDetector)
-        sut = ViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
-        
-        //Act
-        sut.detectFace()
-        
-        //Assert
-        wait(for: [expectation], timeout: 1)
-        XCTAssertEqual(viewDelegate.failureCounter, 1, "didFinishDevicePositionSetup(with error:_) method should be called once")
-        XCTAssertEqual(viewDelegate.completionCounter, 0, "didCompleteDevicePositionSetup() method should not be called")
-        
-    }
+    //func testViewModel_WhenMotionServiceIsPerforming_DevicePositionIsSetAccordingToMotionSettings {}
     
     
 }

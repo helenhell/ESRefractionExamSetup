@@ -12,6 +12,7 @@ import Combine
 protocol FaceDetectorProtocol: NSObject {
     var captureSession: AVCaptureSession! { get }
     var resultPublisher: FaceDetectionSubject! { get }
+    func cameraFeedPreviewLayer() -> AVCaptureVideoPreviewLayer
     func performFaceDetection()
     func stopFaceDetection()
 }

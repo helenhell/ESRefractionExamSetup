@@ -18,7 +18,7 @@ final class FaceDetectionServiceTests: XCTestCase {
     override func setUpWithError() throws {
         subscriptions = []
         faceDetector = MockFaceDetector()
-        sut = FaceDetectionService(faceDetector: faceDetector)
+        sut = FaceDetectionService(serviceProvider: faceDetector)
     }
 
     override func tearDownWithError() throws {
