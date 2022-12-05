@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func setupButtonTapped(_ sender: UIButton) {
-        self.present(AlertService.create(with: ""), animated: true)
         self.viewModel.handleButtonTap()
     }
     
@@ -36,15 +35,16 @@ class ViewController: UIViewController {
         self.instructionLabel.text = viewDetails.inctructionTest
         self.setupButton.setTitle(viewDetails.buttonTitle, for: .normal)
         self.setupButton.isEnabled = viewDetails.buttonEnabled
-        self.setupButton.draw(self.setupButton.frame)
-        self.instructionLabel.draw(self.instructionLabel.frame)
     }
 }
 
 extension ViewController: ViewModelDelegateProtocol {
     
     func displayErrorALert(with message: String) {
-        //
+        DispatchQueue.main.async {
+            let alert = AlertService.create(with: message)
+            self.present(alert, animated: true)
+        }
     }
     
     func handleViewUpdate(with viewDetails: ViewDetails) {

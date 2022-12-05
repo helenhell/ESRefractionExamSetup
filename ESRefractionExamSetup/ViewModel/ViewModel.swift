@@ -10,8 +10,8 @@ import Combine
 
 class ViewModel {
     
-    private var motionService: MotionServiceBase!
-    private var faceDetectionService: FaceDetectionService!
+    private var motionService: any MotionServiceProtocol
+    private var faceDetectionService: FaceDetectionService
     private var subscriptions: Set<AnyCancellable> = []
     
     private var delegate: ViewModelDelegateProtocol?
@@ -22,13 +22,15 @@ class ViewModel {
     }
     private var angleUpdates: [Double] = []
     
-    init(motionService: MotionServiceBase! = MotionService(), faceDetectionService: FaceDetectionService! = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
+    init(motionService: any MotionServiceProtocol = MotionService(), faceDetectionService: FaceDetectionService = FaceDetectionService(faceDetector: FaceDetector()), viewDelegate: ViewModelDelegateProtocol) {
         
         self.delegate = viewDelegate
+        self.motionService = motionService
+        self.faceDetectionService = faceDetectionService
+        
         self.updateView(for: self.state)
         
-        self.motionService = motionService
-        self.motionService.positionPublisher
+        self.motionService.resultPublisher
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 print(completion)
@@ -38,14 +40,13 @@ class ViewModel {
             } receiveValue: { value in
                 if self.isDevicePositionStable(with: value) {
                     self.state = self.state.next
-                    self.motionService.stopMotionUpdates()
+                    self.motionService.stopPerforming()
                     self.angleUpdates = []
                 }
             }
             .store(in: &subscriptions)
         
-        self.faceDetectionService = faceDetectionService
-        self.faceDetectionService.detectionPublisher
+        self.faceDetectionService.resultPublisher
             .first(where: { $0 == .detectedFaces(number: 1) })
             .sink { completion in
                 if case .failure(let error) = completion {
@@ -57,7 +58,7 @@ class ViewModel {
                 case .detectedFaces(number: _):
                     // TODO: Handle use case when more than one case detected
                     self.state = self.state.next
-                    self.faceDetectionService.stopFaceDetection()
+                    self.faceDetectionService.stopPerforming()
                 case .noFaceDetected:
                     break
                 }
@@ -89,12 +90,12 @@ class ViewModel {
     
     private func getDevicePosition() {
         self.state = self.state.next
-        self.motionService.getDevicePosition()
+        self.motionService.performService()
     }
     
     private func detectFace() {
         self.state = self.state.next
-        self.faceDetectionService.detectFace()
+        self.faceDetectionService.performService()
     }
     
     private func handleError(_ error: SetupError) {

@@ -34,11 +34,12 @@
 		51BC87A3293BC6D800A932D8 /* MockViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87A2293BC6D800A932D8 /* MockViewModelDelegate.swift */; };
 		51BC87A5293C8C9000A932D8 /* FaceDetectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87A4293C8C9000A932D8 /* FaceDetectionSettings.swift */; };
 		51BC87A8293CB40B00A932D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51BC87AA293CB40B00A932D8 /* Localizable.strings */; };
-		51BC87AD293CB46000A932D8 /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87AC293CB46000A932D8 /* LocalizableStrings.swift */; };
+		51BC87AD293CB46000A932D8 /* SetupStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87AC293CB46000A932D8 /* SetupStrings.swift */; };
 		51BC87CC293CBBA900A932D8 /* ViewModelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87CB293CBBA900A932D8 /* ViewModelState.swift */; };
 		51BC87D0293CCFD800A932D8 /* ViewDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87CF293CCFD800A932D8 /* ViewDetails.swift */; };
 		51BC87DA293D26E800A932D8 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87D9293D26E800A932D8 /* AlertService.swift */; };
 		51BC87DC293D27C400A932D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */; };
+		51BC87DE293DD56400A932D8 /* SetupServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BC87DD293DD56400A932D8 /* SetupServiceProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,11 +92,12 @@
 		51BC87A4293C8C9000A932D8 /* FaceDetectionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionSettings.swift; sourceTree = "<group>"; };
 		51BC87A9293CB40B00A932D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		51BC87AB293CB43800A932D8 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
-		51BC87AC293CB46000A932D8 /* LocalizableStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
+		51BC87AC293CB46000A932D8 /* SetupStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupStrings.swift; sourceTree = "<group>"; };
 		51BC87CB293CBBA900A932D8 /* ViewModelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelState.swift; sourceTree = "<group>"; };
 		51BC87CF293CCFD800A932D8 /* ViewDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDetails.swift; sourceTree = "<group>"; };
 		51BC87D9293D26E800A932D8 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		51BC87DB293D27C400A932D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		51BC87DD293DD56400A932D8 /* SetupServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServiceProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,10 +150,9 @@
 			children = (
 				514FC1C42935F06F00118912 /* AppDelegate.swift */,
 				514FC1C62935F06F00118912 /* SceneDelegate.swift */,
+				51BC87E1293DE0C100A932D8 /* Model */,
 				51BC87D1293D187400A932D8 /* View */,
 				51BC879F293BC3A700A932D8 /* ViewModel */,
-				51BC87932938F94100A932D8 /* FaceDetectionService */,
-				51BC87922938F92400A932D8 /* MotionService */,
 				51BC87AE293CB47800A932D8 /* Localization */,
 				514FC1D22935F07100118912 /* Info.plist */,
 				514FC1CD2935F07100118912 /* Assets.xcassets */,
@@ -192,8 +193,8 @@
 		51BC878B2938CE0300A932D8 /* FaceDetectionServiceTests */ = {
 			isa = PBXGroup;
 			children = (
-				51BC878C2938CE2800A932D8 /* FaceDetectionServiceTests.swift */,
 				51BC87982939103100A932D8 /* MockFaceDetector.swift */,
+				51BC878C2938CE2800A932D8 /* FaceDetectionServiceTests.swift */,
 			);
 			path = FaceDetectionServiceTests;
 			sourceTree = "<group>";
@@ -201,9 +202,9 @@
 		51BC87922938F92400A932D8 /* MotionService */ = {
 			isa = PBXGroup;
 			children = (
-				514FC1FE2937667400118912 /* MotionSettings.swift */,
-				514FC1F8293738BD00118912 /* MotionServiceError.swift */,
 				514FC1FC29374E7200118912 /* MotionServiceProtocol.swift */,
+				514FC1F8293738BD00118912 /* MotionServiceError.swift */,
+				514FC1FE2937667400118912 /* MotionSettings.swift */,
 				514FC1F62937380700118912 /* MotionService.swift */,
 			);
 			path = MotionService;
@@ -236,8 +237,8 @@
 			children = (
 				51BC87A0293BC5CF00A932D8 /* ViewModelDelegateProtocol.swift */,
 				51BC87CF293CCFD800A932D8 /* ViewDetails.swift */,
-				514FC2052938936300118912 /* ViewModel.swift */,
 				51BC87CB293CBBA900A932D8 /* ViewModelState.swift */,
+				514FC2052938936300118912 /* ViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -245,7 +246,7 @@
 		51BC87AE293CB47800A932D8 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				51BC87AC293CB46000A932D8 /* LocalizableStrings.swift */,
+				51BC87AC293CB46000A932D8 /* SetupStrings.swift */,
 				51BC87AA293CB40B00A932D8 /* Localizable.strings */,
 			);
 			path = Localization;
@@ -275,6 +276,16 @@
 				514FC1C82935F06F00118912 /* ViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		51BC87E1293DE0C100A932D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				51BC87DD293DD56400A932D8 /* SetupServiceProtocol.swift */,
+				51BC87922938F92400A932D8 /* MotionService */,
+				51BC87932938F94100A932D8 /* FaceDetectionService */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -428,7 +439,8 @@
 				514FC2062938936300118912 /* ViewModel.swift in Sources */,
 				514FC1FF2937667400118912 /* MotionSettings.swift in Sources */,
 				51BC87912938F8F900A932D8 /* FaceDetectionServiceError.swift in Sources */,
-				51BC87AD293CB46000A932D8 /* LocalizableStrings.swift in Sources */,
+				51BC87AD293CB46000A932D8 /* SetupStrings.swift in Sources */,
+				51BC87DE293DD56400A932D8 /* SetupServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

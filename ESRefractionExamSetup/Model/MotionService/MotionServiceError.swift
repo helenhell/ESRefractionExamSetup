@@ -17,10 +17,17 @@ enum MotionServiceError: SetupError {
     case deviceMotionIsUnavailable
     case incorrectUpdateInterval
     case motionUpdateFailed
-    case generalError
+    
     
     var message: String {
-        return "Motion Service Error"
+        switch self {
+        case .deviceMotionIsUnavailable:
+            return SetupStrings.DEVICE_MOTION_UNAVAILABLE.localized
+        case .incorrectUpdateInterval:
+            return SetupStrings.INCORRECT_UPDATE_INTERVAL.localized
+        case .motionUpdateFailed:
+            return SetupStrings.MOTION_UPDATE_FAILED.localized
+        }
     }
     
 }

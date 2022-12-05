@@ -11,23 +11,26 @@ import Combine
 import XCTest
 @testable import ESRefractionExamSetup
 
-class MockMotionService: MotionServiceBase {
-    
-    typealias T = MotionServiceError
-    
-    var motionIntervalSetExpectation: XCTestExpectation?
-    var motionIntervalSetCallCounter = 0
-    
-    override init(motionManager: CMMotionManager! = CMMotionManager(), positionPublisher: PassthroughSubject<Double, MotionServiceBase.T>! = PassthroughSubject<Double,T>(), isDeviceMotionAvailable: Bool = true, motionUpdateInterval: Double = MotionSettings.motionUpdateInterval) {
-        super.init(motionManager: motionManager, motionUpdateInterval: motionUpdateInterval)
-    }
-    
-    override func isMotionUpdateIntervalSet() -> (Bool, T?) {
-        self.motionIntervalSetCallCounter += 1
-        self.motionIntervalSetExpectation?.fulfill()
-        
-        return super.isMotionUpdateIntervalSet()
-    }
-    
-    
-}
+//class MockMotionService: MotionServiceProtocol {
+//
+//    typealias T = MotionServiceError
+//
+//    var motionIntervalSetExpectation: XCTestExpectation?
+//    var motionIntervalSetCallCounter = 0
+//
+//    init(isDeviceMotionAvailable: Bool, resultPublisher: PassthroughSubject<Double, MotionServiceError>, serviceProvider: CMMotionManager, motionUpdateInterval: Double = MotionSettings.motionUpdateInterval) {
+//        self.isDeviceMotionAvailable = isDeviceMotionAvailable
+//        self.resultPublisher = resultPublisher
+//        self.serviceProvider = serviceProvider
+//        self.serviceProvider.deviceMotionUpdateInterval = motionUpdateInterval
+//    }
+//
+//    override func isMotionUpdateIntervalSet() -> (Bool, T?) {
+//        self.motionIntervalSetCallCounter += 1
+//        self.motionIntervalSetExpectation?.fulfill()
+//        
+//        return super.isMotionUpdateIntervalSet()
+//    }
+//
+//
+//}

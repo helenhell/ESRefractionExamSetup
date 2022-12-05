@@ -11,11 +11,11 @@ import Combine
 
 final class MotionServiceTests: XCTestCase {
     
-    var sut: MockMotionService!
+    var sut: MotionService!
     var cancellables: Set<AnyCancellable>!
     
     override func setUpWithError() throws {
-        sut = MockMotionService()
+        sut = MotionService()
         cancellables = Set<AnyCancellable>()
     }
 
@@ -26,10 +26,10 @@ final class MotionServiceTests: XCTestCase {
 
     func testMotionService_WhenDeviceMotionUnavailable_ReturnSpecificError() {
         // Arrange
-        sut = MockMotionService(isDeviceMotionAvailable: false)
+        sut = MotionService(isDeviceMotionAvailable: false)
         
         //Act
-        sut.positionPublisher
+        sut.resultPublisher
             // Assert
             .sink { completion in
                 switch completion {
@@ -42,27 +42,14 @@ final class MotionServiceTests: XCTestCase {
                 XCTFail("When device motion is unavailable should receive no value")
             }
             .store(in: &cancellables)
-        sut.getDevicePosition()
+        sut.performService()
     }
 
-    func testMotionService_BeforeMotionUpdatesStarted_updateIntervalIsSetCheckIsPerformed() {
-        // Arrange
-        let expectation = expectation(description: "Expecting isMotionUpdateIntervalSet() method to be called")
-        sut.motionIntervalSetExpectation = expectation
-        
-        // Act
-        let _ = sut.getDevicePosition()
-        wait(for: [expectation], timeout: 0.5)
-        
-        // Assert
-        XCTAssertEqual(sut.motionIntervalSetCallCounter, 1, "isMotionUpdateIntervalSet() method is not called or called more than once")
-        
-    }
     
     func testMotionService_WhenUpdateIntervalCheckIsSetToSettingsValue_ReturnsTrue() {
         
         //Arrange
-        sut = MockMotionService(motionUpdateInterval: MotionSettings.motionUpdateInterval)
+        sut = MotionService(motionUpdateInterval: MotionSettings.motionUpdateInterval)
         //Act
         let result = sut.isMotionUpdateIntervalSet()
         
@@ -74,7 +61,7 @@ final class MotionServiceTests: XCTestCase {
     func testMotionService_WhenUpdateIntervalCheckIsSetToIncorrectValue_ReturnsSpecificError() {
         
         //Arrange
-        sut = MockMotionService(motionUpdateInterval: 5)
+        sut = MotionService(motionUpdateInterval: 5)
         //Act
         let result = sut.isMotionUpdateIntervalSet()
         
@@ -89,10 +76,10 @@ final class MotionServiceTests: XCTestCase {
         //Arrange
         let motionManager = MockMotionManager()
         motionManager.error = MotionServiceError.motionUpdateFailed
-        sut = MockMotionService(motionManager: motionManager)
+        sut = MotionService(serviceProvider: motionManager)
         
         //Act
-        sut.positionPublisher
+        sut.resultPublisher
             //Assert
             .sink { completion in
                 switch completion {
@@ -105,19 +92,19 @@ final class MotionServiceTests: XCTestCase {
                 XCTFail("When motion update fails MotionService's getDevicePosition() method should send no value")
             }
             .store(in: &cancellables)
-        sut.getDevicePosition()
+        sut.performService()
     }
     
     func testMotionService_WhenMotionUpdateSucceeds_ReturnsValuesAccordingToUpdateInterval() {
         
         //Arrange
         let motionManager = MockMotionManager()
-        sut = MockMotionService(motionManager: motionManager)
+        sut = MotionService(serviceProvider: motionManager)
         let expectation = expectation(description: "waiting for values")
         
         //Act
         var receivedValues: [Double] = []
-        sut.positionPublisher
+        sut.resultPublisher
             .sink { completion in
                 guard case .finished = completion else {
                     return
@@ -128,10 +115,10 @@ final class MotionServiceTests: XCTestCase {
             }
             .store(in: &cancellables)
         
-        sut.getDevicePosition()
+        sut.performService()
         
         DispatchQueue.main.asyncAfter(deadline: .now()+5) { [weak self] in
-            self?.sut.positionPublisher.send(completion: .finished)
+            self?.sut.resultPublisher.send(completion: .finished)
         }
         wait(for: [expectation], timeout: 5.1)
         

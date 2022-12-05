@@ -34,7 +34,7 @@ final class FaceDetectionServiceTests: XCTestCase {
         var result: FaceDetectionResult?
         
         //Act
-        sut.detectionPublisher
+        sut.resultPublisher
             .sink { completion in
                 guard case .finished = completion else {
                     XCTFail("When FaceDetectionService's detectFace() method succeeded with 0 result, no error should be send")
@@ -45,7 +45,7 @@ final class FaceDetectionServiceTests: XCTestCase {
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
-        sut.detectFace()
+        sut.performService()
         
         wait(for: [expectation], timeout: 1)
         
@@ -62,7 +62,7 @@ final class FaceDetectionServiceTests: XCTestCase {
         var result: Int = 0
         
         //Act
-        sut.detectionPublisher
+        sut.resultPublisher
             .sink { completion in
                 guard case .finished = completion else {
                     XCTFail("When FaceDetectionService's detectFace() method succeeded with 0 result, no error should be send")
@@ -78,7 +78,7 @@ final class FaceDetectionServiceTests: XCTestCase {
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
-        sut.detectFace()
+        sut.performService()
         
         wait(for: [expectation], timeout: 1)
         
@@ -93,7 +93,7 @@ final class FaceDetectionServiceTests: XCTestCase {
         var error: FaceDetectionServiceError?
         
         //Act
-        sut.detectionPublisher
+        sut.resultPublisher
             .sink { completion in
                 guard case .failure(let receivedError) = completion else {
                     XCTFail("When FaceDetectionService's detectFace() method faileds should send completion with error")
@@ -105,7 +105,7 @@ final class FaceDetectionServiceTests: XCTestCase {
                 XCTFail("When FaceDetectionService's detectFace() method failes, no value should be sent")
             }
             .store(in: &subscriptions)
-        sut.detectFace()
+        sut.performService()
         
         wait(for: [expectation], timeout: 1)
         

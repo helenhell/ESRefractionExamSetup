@@ -6,7 +6,7 @@
   
 */
 
-
+//VIEW TEXTS
 SETUP_START_INSTRUCTION = "Press button to start setup";
 SETUP_START_BUTTON_TITLE = "Start";
 POSITIONING_INSTRUCTION = "Position the phone at the correct angle";
@@ -21,4 +21,11 @@ CHECKING_POSITION_BUTTON_TITLE = "Wait...";
 SETUP_COMPLETE_INSTRUCTION = "Setup complete! You can start your refraction exam.";
 SETUP_COMPLETE_BUTTON_TITLE = "Start";
 
-
+//ALERT MESSAGES
+ALERT_TITLE = "Setup Interrupted";
+DEVICE_MOTION_UNAVAILABLE = "Device motion service is unavailable";
+INCORRECT_UPDATE_INTERVAL = "Incorrect motion update interval was set";
+MOTION_UPDATE_FAILED = "Motion service update failed";
+NO_CAMERA_FOUND = "Device camera is unavailable";
+DETECTION_REQUEST_FAILED = "Face detection request failed";
+CAPTURING_OUTPUT_FAILED = "Capturing ccamera output failed";

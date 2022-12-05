@@ -11,7 +11,7 @@ import XCTest
 final class ViewModelTests: XCTestCase {
     
     var sut: ViewModel!
-    var motionService: MockMotionService!
+    var motionService: MotionService!
     var motionManager: MockMotionManager!
     var faceDetectionService: FaceDetectionService!
     var viewDelegate: MockViewModelDelegate!
@@ -20,7 +20,7 @@ final class ViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         viewDelegate = MockViewModelDelegate()
         motionManager = MockMotionManager()
-        motionService = MockMotionService(motionManager: motionManager)
+        motionService = MotionService(serviceProvider: motionManager)
         
         
     }
@@ -98,7 +98,7 @@ final class ViewModelTests: XCTestCase {
         sut = ViewModel(motionService: motionService, faceDetectionService: faceDetectionService, viewDelegate: viewDelegate)
         
         //Act
-        //sut.detectFace()
+        sut.detectFace()
         
         //Assert
         wait(for: [expectation], timeout: 1)
